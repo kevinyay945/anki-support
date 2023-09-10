@@ -4,6 +4,7 @@ go 1.21.0
 
 require (
 	cloud.google.com/go/texttospeech v1.7.1
+	github.com/sashabaranov/go-openai v1.15.2
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.16.0
 	github.com/stretchr/testify v1.8.3

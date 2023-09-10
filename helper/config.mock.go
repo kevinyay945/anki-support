@@ -46,3 +46,17 @@ func (mr *MockConfigerMockRecorder) GoogleApiToken() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GoogleApiToken", reflect.TypeOf((*MockConfiger)(nil).GoogleApiToken))
 }
+
+// OpenAIToken mocks base method.
+func (m *MockConfiger) OpenAIToken() string {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "OpenAIToken")
+	ret0, _ := ret[0].(string)
+	return ret0
+}
+
+// OpenAIToken indicates an expected call of OpenAIToken.
+func (mr *MockConfigerMockRecorder) OpenAIToken() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OpenAIToken", reflect.TypeOf((*MockConfiger)(nil).OpenAIToken))
+}

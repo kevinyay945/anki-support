@@ -7,9 +7,14 @@ var Config Configer
 //go:generate mockgen -destination=config.mock.go -package=helper -self_package=2023_asset_management/helper . Configer
 type Configer interface {
 	GoogleApiToken() string
+	OpenAIToken() string
 }
 
 type config struct {
+}
+
+func (m *config) OpenAIToken() string {
+	return viper.GetString("OPEN_AI_TOKEN")
 }
 
 func (m *config) GoogleApiToken() string {
