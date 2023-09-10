@@ -1,0 +1,3 @@
+.PHONY: test
+test:
+	RUN_INFRASTRUCTURE=true go test ./...
