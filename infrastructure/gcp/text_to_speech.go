@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func (c *Client) GenerateAudioByText(inputText string, outputPath string, outputFileName string) (err error) {
+func (c *Client) GenerateAudioByText(inputText string, outputPath string, outputFileName string) (outputFilePath string, err error) {
 	ctx, cancelFunc := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancelFunc()
 	// Perform the text-to-speech request on the text input with the selected
@@ -44,5 +44,6 @@ func (c *Client) GenerateAudioByText(inputText string, outputPath string, output
 		log.Fatal(err)
 	}
 	fmt.Printf("Audio content written to file: %v\n", filename)
+	outputFilePath = filename
 	return
 }

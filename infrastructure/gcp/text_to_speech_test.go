@@ -48,7 +48,7 @@ func (t *TextToSpeechSuite) Test_generate_japanese_file() {
 	outputPath := "/Users/kevin/Developer/side-project/anki-support/temp"
 	expectOutput := filepath.Join(outputPath, "私の机は木製です。.mp3")
 	os.Remove(expectOutput)
-	err := t.client.GenerateAudioByText("私の机は木製です。", outputPath, "私の机は木製です。")
+	_, err := t.client.GenerateAudioByText("私の机は木製です。", outputPath, "私の机は木製です。")
 	t.NoError(err)
 	t.FileExists(expectOutput)
 }

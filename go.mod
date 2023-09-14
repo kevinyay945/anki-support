@@ -8,6 +8,7 @@ require (
 	github.com/imroc/req/v3 v3.41.12
 	github.com/privatesquare/bkst-go-utils v1.5.4
 	github.com/sashabaranov/go-openai v1.15.2
+	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.16.0
 	github.com/stretchr/testify v1.8.3

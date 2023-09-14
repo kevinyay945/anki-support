@@ -18,7 +18,7 @@ func (m *config) OpenAIToken() string {
 }
 
 func (m *config) GoogleApiToken() string {
-	return viper.GetString("GOOGLE_DRIVE_API_TOKEN")
+	return viper.GetString("GOOGLE_API_TOKEN")
 }
 
 func newConfig() Configer {

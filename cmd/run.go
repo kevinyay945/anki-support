@@ -5,16 +5,13 @@ package cmd
 
 import (
 	"anki-support/helper"
-	"context"
+	"anki-support/infrastructure/anki"
+	"anki-support/infrastructure/gcp"
+	"anki-support/infrastructure/openai"
 	"fmt"
-	"google.golang.org/api/option"
-	"log"
-	"os"
-
+	"github.com/atselvan/ankiconnect"
 	"github.com/spf13/cobra"
-
-	texttospeech "cloud.google.com/go/texttospeech/apiv1"
-	"cloud.google.com/go/texttospeech/apiv1/texttospeechpb"
+	"path/filepath"
 )
 
 // runCmd represents the run command
@@ -28,45 +25,64 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		ctx := context.Background()
-
-		client, err := texttospeech.NewClient(ctx, option.WithCredentialsJSON([]byte(helper.Config.GoogleApiToken())))
+		fmt.Println("Hello World")
+		ankiClient := anki.NewClient()
+		noteList, err := ankiClient.GetTodoNoteFromDeck("製作中日語卡片")
 		if err != nil {
-			log.Fatal(err)
+			fmt.Printf("GetTodoNoteFromDeck, %s", err.Error())
+			return
 		}
-		defer client.Close()
-
-		// Perform the text-to-speech request on the text input with the selected
-		// voice parameters and audio file type.
-		req := texttospeechpb.SynthesizeSpeechRequest{
-			// Set the text input to be synthesized.
-			Input: &texttospeechpb.SynthesisInput{
-				InputSource: &texttospeechpb.SynthesisInput_Text{Text: "私の机は木製です。"},
-			},
-			// Build the voice request, select the language code ("en-US") and the SSML
-			// voice gender ("neutral").
-			Voice: &texttospeechpb.VoiceSelectionParams{
-				LanguageCode: "ja-JP",
-				Name:         "ja-JP-Wavenet-B",
-			},
-			// Select the type of audio file you want returned.
-			AudioConfig: &texttospeechpb.AudioConfig{
-				AudioEncoding: texttospeechpb.AudioEncoding_MP3,
-			},
-		}
-
-		resp, err := client.SynthesizeSpeech(ctx, &req)
+		allNoteList, err := ankiClient.GetTodoNoteFromDeck("製作中日語卡片")
 		if err != nil {
-			log.Fatal(err)
+			fmt.Printf("GetTodoNoteFromDeck, %s", err.Error())
+			return
+		}
+		allVocabularyList := []string{}
+		for _, note := range allNoteList {
+			allVocabularyList = append(allVocabularyList, note.Fields["Expression"].Value)
 		}
 
-		// The resp's AudioContent is binary.
-		filename := "output.mp3"
-		err = os.WriteFile(filename, resp.AudioContent, 0644)
-		if err != nil {
-			log.Fatal(err)
+		for _, note := range noteList {
+			switch note.ModelName {
+			case "Japanese (recognition&recall)":
+				gcpClient := gcp.NewClient()
+				defer gcpClient.Close()
+				fmt.Println(note.ModelName)
+				expression := note.Fields["Expression"].Value
+				reading := note.Fields["Reading"].Value
+				meaning := note.Fields["Meaning"].Value
+				path, _ := helper.GetCurrentExecutableFolderPath()
+				tempAssetPath := filepath.Join(path, "temp")
+				expressionVoicePath, _ := gcpClient.GenerateAudioByText(expression, tempAssetPath, expression)
+
+				openAIClient := openai.NewClient()
+				sentence, hiraganaSentence, chineseSentence, err := openAIClient.MakeJapaneseSentence(allVocabularyList, reading, meaning)
+				if err != nil {
+					continue
+				}
+				sentenceVoicePath, _ := gcpClient.GenerateAudioByText(sentence, tempAssetPath, sentence)
+				note.Fields["JapaneseNote"] = ankiconnect.FieldData{
+					Value: hiraganaSentence,
+					Order: note.Fields["JapaneseNote"].Order,
+				}
+				note.Fields["ChineseNote"] = ankiconnect.FieldData{
+					Value: chineseSentence,
+					Order: note.Fields["ChineseNote"].Order,
+				}
+
+				ankiClient.EditNoteById(note, []ankiconnect.Audio{{
+					Path:     expressionVoicePath,
+					Filename: filepath.Base(expressionVoicePath),
+					Fields:   []string{"Sound"},
+				}, {
+					Path:     sentenceVoicePath,
+					Filename: filepath.Base(sentenceVoicePath),
+					Fields:   []string{"JapaneseSound"},
+				}}, nil, nil)
+				ankiClient.DeleteTagFromNote(note.NoteId, "anki-helper-vocabulary-todo")
+				ankiClient.AddTagFromNote(note.NoteId, "anki-helper-vocabulary-done")
+			}
 		}
-		fmt.Printf("Audio content written to file: %v\n", filename)
 	},
 }
 

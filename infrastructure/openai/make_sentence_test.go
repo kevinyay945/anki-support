@@ -45,7 +45,7 @@ func (t *MakeSentenceSuite) Test_make_japanese_sentence() {
 	rememberVocabularyList := []string{
 		"両親", "月餅", "電池", "彼の方", "お兄さん", "高速バス", "お姉さん", "映画", "前", "乗り場", "冷蔵庫", "学校", "明後日", "チケット", "番線",
 	}
-	sentence, hiraganaSentence, chineseSentence, err := t.client.makeJapaneseSentence(rememberVocabularyList, "山")
+	sentence, hiraganaSentence, chineseSentence, err := t.client.MakeJapaneseSentence(rememberVocabularyList, "電気[でんき]", "電燈")
 	t.NoError(err)
 
 	t.Equal("japanese origin sentence", sentence)
