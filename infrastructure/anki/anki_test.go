@@ -2,8 +2,10 @@ package anki
 
 import (
 	"github.com/atselvan/ankiconnect"
+	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/mock/gomock"
+	"io"
 	"os"
 	"testing"
 )
@@ -18,11 +20,14 @@ func TestSuiteInitAnki(t *testing.T) {
 	if os.Getenv("RUN_INFRASTRUCTURE") == "true" {
 		t.Skip("Skipping testing in production")
 	}
+	suite.Run(t, new(AnkiSuite))
 }
 
 func (t *AnkiSuite) SetupTest() {
+	logger := logrus.New()
+	logger.SetOutput(io.Discard)
 	t.mockCtrl = gomock.NewController(t.Suite.T())
-	client := NewClient()
+	client := NewClient(logger)
 	t.client = client
 }
 
@@ -59,8 +64,15 @@ func (t *AnkiSuite) Test_get_todo_note_from_deck_name() {
 
 func (t *AnkiSuite) Test_get_note_by_id() {
 	noteId := int64(1694305287189)
-	_, err := t.client.GetNoteById(noteId)
+	note, err := t.client.GetNoteById(noteId)
 	t.NoError(err)
+	t.NotEmpty(note)
+}
+
+func (t *AnkiSuite) Test_get_media_path() {
+	path, err := t.client.GetMediaFolderPath()
+	t.NoError(err)
+	t.Equal("test", path)
 }
 
 func (t *AnkiSuite) Test_edit_note_and_add_audio() {
@@ -75,7 +87,7 @@ func (t *AnkiSuite) Test_edit_note_and_add_audio() {
 			Path:     outputPath,
 			Filename: "私の机は木製です。.mp3",
 			SkipHash: "",
-			Fields:   []string{"JapaneseSound"},
+			Fields:   []string{"Japanese-ToSound"},
 		},
 	}
 	err = t.client.EditNoteById(note, audioList, nil, nil)

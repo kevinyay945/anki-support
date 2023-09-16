@@ -5,18 +5,29 @@ import (
 	"github.com/atselvan/ankiconnect"
 	"github.com/imroc/req/v3"
 	"github.com/privatesquare/bkst-go-utils/utils/errors"
+	"github.com/sirupsen/logrus"
+	"os"
+	"path/filepath"
 )
 
 type Client struct {
-	ankiConnect *ankiconnect.Client
-	httpClient  *req.Client
+	ankiConnect   *ankiconnect.Client
+	ankiMediaPath string
+	httpClient    *req.Client
+	log           *logrus.Entry
 }
 
-func NewClient() *Client {
-	c := &Client{}
+func NewClient(log *logrus.Logger) *Client {
+	field := log.WithField("infrastructure", "anki")
+	c := &Client{log: field}
 	c.ankiConnect = ankiconnect.NewClient()
 	c.httpClient = req.C()
 	c.httpClient.SetBaseURL("http://127.0.0.1:8765")
+	if path, err := c.GetMediaFolderPath(); err != nil {
+		c.log.Warnf("Fail To Get Media Folder: %s", err.Error())
+	} else {
+		c.ankiMediaPath = path
+	}
 	return c
 }
 
@@ -52,10 +63,36 @@ func (c *Client) EditNoteById(
 	for s, data := range note.Fields {
 		updateFields[s] = data.Value
 	}
+	var oldAudioList []ankiconnect.Audio
+	for _, audio := range audioList {
+		if audio.Path == "" {
+			oldAudioList = append(oldAudioList, audio)
+			continue
+		}
+		input, err := os.ReadFile(audio.Path)
+		if err != nil {
+			c.log.Warnf("Fail to read audio file: %s", err.Error())
+			oldAudioList = append(oldAudioList, audio)
+			continue
+		}
+
+		ankiAudioFile := fmt.Sprintf("anki-support-%s", audio.Filename)
+		destinationFile := filepath.Join(c.ankiMediaPath, ankiAudioFile)
+		err = os.WriteFile(destinationFile, input, 0644)
+		if err != nil {
+			c.log.Warnln("Error creating", destinationFile)
+			c.log.Warnln(err.Error())
+			oldAudioList = append(oldAudioList, audio)
+			continue
+		}
+		for _, field := range audio.Fields {
+			updateFields[field] = fmt.Sprintf("[sound:%s]", ankiAudioFile)
+		}
+	}
 	err := c.ankiConnect.Notes.Update(ankiconnect.UpdateNote{
 		Id:      note.NoteId,
 		Fields:  updateFields,
-		Audio:   audioList,
+		Audio:   oldAudioList,
 		Video:   videoList,
 		Picture: pictureList,
 	})
@@ -168,6 +205,29 @@ func (c *Client) AddTagFromNote(id int64, tag string) error {
 		return fmt.Errorf("fail to add note tag")
 	}
 	return nil
+}
+
+func (c *Client) GetMediaFolderPath() (string, error) {
+	result := struct {
+		Result string `json:"result"`
+		Error  string `json:"error"`
+	}{}
+	post, err := c.httpClient.R().SetBodyJsonString(`
+	{
+		"action": "getMediaDirPath",
+		"version": 6
+	}
+	`).SetSuccessResult(&result).Post("")
+	if err != nil {
+		return "", fmt.Errorf("fail to add note tag")
+	}
+	if post.IsErrorState() {
+		return "", fmt.Errorf("fail to add note tag")
+	}
+	if result.Error != "" {
+		return "", fmt.Errorf("fail to add note tag")
+	}
+	return result.Result, nil
 }
 
 func NewAnkiError(err *errors.RestErr) error {
