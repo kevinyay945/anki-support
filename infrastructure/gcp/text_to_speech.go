@@ -24,7 +24,7 @@ func (c *Client) GenerateAudioByText(inputText string, outputPath string, output
 		// voice gender ("neutral").
 		Voice: &texttospeechpb.VoiceSelectionParams{
 			LanguageCode: "ja-JP",
-			Name:         "ja-JP-Wavenet-B",
+			Name:         "ja-JP-Neural2-B",
 		},
 		// Select the type of audio file you want returned.
 		AudioConfig: &texttospeechpb.AudioConfig{

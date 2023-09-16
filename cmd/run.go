@@ -25,14 +25,15 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Hello World")
 		ankiClient := anki.NewClient()
-		noteList, err := ankiClient.GetTodoNoteFromDeck("製作中日語卡片")
+		//deckName := "製作中日語卡片"
+		deckName := "日語單字"
+		noteList, err := ankiClient.GetTodoNoteFromDeck(deckName)
 		if err != nil {
 			fmt.Printf("GetTodoNoteFromDeck, %s", err.Error())
 			return
 		}
-		allNoteList, err := ankiClient.GetTodoNoteFromDeck("製作中日語卡片")
+		allNoteList, err := ankiClient.GetTodoNoteFromDeck(deckName)
 		if err != nil {
 			fmt.Printf("GetTodoNoteFromDeck, %s", err.Error())
 			return
