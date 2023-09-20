@@ -13,7 +13,7 @@ import (
 type TextToSpeechSuite struct {
 	suite.Suite
 	mockCtrl *gomock.Controller
-	client   *Client
+	client   GCPer
 }
 
 func TestSuiteInitTextToSpeech(t *testing.T) {
@@ -37,7 +37,7 @@ func (t *TextToSpeechSuite) SetupTest() {
 	mockConfiger.EXPECT().GoogleApiToken().Return(string(credential.Token))
 	helper.Config = mockConfiger
 
-	t.client = NewClient()
+	t.client = NewGCP()
 }
 
 func (t *TextToSpeechSuite) TearDownTest() {
@@ -47,7 +47,7 @@ func (t *TextToSpeechSuite) TearDownTest() {
 func (t *TextToSpeechSuite) Test_generate_japanese_file() {
 	outputPath := "/Users/kevin/Developer/side-project/anki-support/temp"
 	expectOutput := filepath.Join(outputPath, "私の机は木製です。.mp3")
-	os.Remove(expectOutput)
+	_ = os.Remove(expectOutput)
 	_, err := t.client.GenerateAudioByText("私の机は木製です。", outputPath, "私の机は木製です。")
 	t.NoError(err)
 	t.FileExists(expectOutput)

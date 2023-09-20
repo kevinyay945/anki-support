@@ -12,7 +12,7 @@ import (
 type MakeSentenceSuite struct {
 	suite.Suite
 	mockCtrl *gomock.Controller
-	client   *Client
+	client   OpenAIer
 }
 
 func TestSuiteInitMakeSentence(t *testing.T) {

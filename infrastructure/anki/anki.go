@@ -10,16 +10,16 @@ import (
 	"path/filepath"
 )
 
-type Client struct {
+type Anki struct {
 	ankiConnect   *ankiconnect.Client
 	ankiMediaPath string
 	httpClient    *req.Client
 	log           *logrus.Entry
 }
 
-func NewClient(log *logrus.Logger) *Client {
+func NewClient(log *logrus.Logger) Ankier {
 	field := log.WithField("infrastructure", "anki")
-	c := &Client{log: field}
+	c := &Anki{log: field}
 	c.ankiConnect = ankiconnect.NewClient()
 	c.httpClient = req.C()
 	c.httpClient.SetBaseURL("http://127.0.0.1:8765")
@@ -31,29 +31,29 @@ func NewClient(log *logrus.Logger) *Client {
 	return c
 }
 
-func (c *Client) Ping() (err error) {
+func (c *Anki) Ping() (err error) {
 	restErr := c.ankiConnect.Ping()
 	return NewAnkiError(restErr)
 }
 
-func (c *Client) GetAllDeck() ([]string, error) {
+func (c *Anki) GetAllDeck() ([]string, error) {
 	all, err := c.ankiConnect.Decks.GetAll()
 	return *all, NewAnkiError(err)
 }
 
-func (c *Client) GetAllNoteFromDeck(name string) ([]ankiconnect.ResultNotesInfo, error) {
+func (c *Anki) GetAllNoteFromDeck(name string) ([]ankiconnect.ResultNotesInfo, error) {
 	get, err := c.ankiConnect.Notes.Get(fmt.Sprintf("deck:%s", name))
 	return *get, NewAnkiError(err)
 }
 
-func (c *Client) GetTodoNoteFromDeck(deckName string) ([]ankiconnect.ResultNotesInfo, error) {
+func (c *Anki) GetTodoNoteFromDeck(deckName string) ([]ankiconnect.ResultNotesInfo, error) {
 	todoTag := "anki-helper-vocabulary-todo"
 	get, err := c.ankiConnect.Notes.Get(fmt.Sprintf("tag:%s deck:%s", todoTag, deckName))
 	return *get, NewAnkiError(err)
 }
 
 // EditNoteById should be careful that you can't edit tag, and you can't edit when you open this card on anki gui
-func (c *Client) EditNoteById(
+func (c *Anki) EditNoteById(
 	note ankiconnect.ResultNotesInfo,
 	audioList []ankiconnect.Audio,
 	videoList []ankiconnect.Video,
@@ -99,7 +99,7 @@ func (c *Client) EditNoteById(
 	return NewAnkiError(err)
 }
 
-func (c *Client) GetNoteById(id int64) (ankiconnect.ResultNotesInfo, error) {
+func (c *Anki) GetNoteById(id int64) (ankiconnect.ResultNotesInfo, error) {
 	result := struct {
 		Result []struct {
 			NoteId int64    `json:"noteId"`
@@ -151,7 +151,7 @@ func (c *Client) GetNoteById(id int64) (ankiconnect.ResultNotesInfo, error) {
 	return output, nil
 }
 
-func (c *Client) DeleteTagFromNote(noteId int64, tag string) error {
+func (c *Anki) DeleteTagFromNote(noteId int64, tag string) error {
 	result := struct {
 		Error string `json:"error"`
 	}{}
@@ -179,7 +179,7 @@ func (c *Client) DeleteTagFromNote(noteId int64, tag string) error {
 	return nil
 }
 
-func (c *Client) AddTagFromNote(id int64, tag string) error {
+func (c *Anki) AddTagFromNote(id int64, tag string) error {
 	result := struct {
 		Error string `json:"error"`
 	}{}
@@ -207,7 +207,7 @@ func (c *Client) AddTagFromNote(id int64, tag string) error {
 	return nil
 }
 
-func (c *Client) GetMediaFolderPath() (string, error) {
+func (c *Anki) GetMediaFolderPath() (string, error) {
 	result := struct {
 		Result string `json:"result"`
 		Error  string `json:"error"`
@@ -240,11 +240,13 @@ func NewAnkiError(err *errors.RestErr) error {
 	return fmt.Errorf("status: %d, message: %s, error: %s", err.StatusCode, err.Message, err.Error)
 }
 
-type Clienter interface {
+//go:generate mockgen -destination=anki.mock.go -package=anki -self_package=anki-support/infrastructure/anki . Ankier
+type Ankier interface {
 	Ping() (err error)
 	GetAllDeck() ([]string, error)
 	GetAllNoteFromDeck(name string) ([]ankiconnect.ResultNotesInfo, error)
 	GetTodoNoteFromDeck(deckName string) ([]ankiconnect.ResultNotesInfo, error)
+	GetMediaFolderPath() (string, error)
 	EditNoteById(
 		note ankiconnect.ResultNotesInfo,
 		audioList []ankiconnect.Audio,

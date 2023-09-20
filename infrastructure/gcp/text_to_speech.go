@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func (c *Client) GenerateAudioByText(inputText string, outputPath string, outputFileName string) (outputFilePath string, err error) {
+func (c *GCP) GenerateAudioByText(inputText string, outputPath string, outputFileName string) (outputFilePath string, err error) {
 	ctx, cancelFunc := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancelFunc()
 	// Perform the text-to-speech request on the text input with the selected

@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func (c *Client) MakeJapaneseSentence(rememberVocabularyList []string, vocabulary, meaning string) (japaneseOriginSentence, japaneseHiraganaSentence, traditionalChineseSentence string, err error) {
+func (c *OpenAI) MakeJapaneseSentence(rememberVocabularyList []string, vocabulary, meaning string) (japaneseOriginSentence, japaneseHiraganaSentence, traditionalChineseSentence string, err error) {
 	resp, err := c.openai.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{

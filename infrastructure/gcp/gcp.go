@@ -9,12 +9,12 @@ import (
 	"time"
 )
 
-type Client struct {
+type GCP struct {
 	textToSpeechClient *texttospeech.Client
 }
 
-func NewClient() *Client {
-	c := &Client{}
+func NewGCP() GCPer {
+	c := &GCP{}
 	for {
 		token := helper.Config.GoogleApiToken()
 		if err := c.setClientByToken(token); err != nil {
@@ -25,11 +25,11 @@ func NewClient() *Client {
 		return c
 	}
 }
-func (c *Client) Close() {
-	c.textToSpeechClient.Close()
+func (c *GCP) Close() {
+	_ = c.textToSpeechClient.Close()
 }
 
-func (c *Client) setClientByToken(token string) (err error) {
+func (c *GCP) setClientByToken(token string) (err error) {
 	tokenByte := []byte(token)
 	client, err := texttospeech.NewClient(context.Background(), option.WithCredentialsJSON(tokenByte))
 	if err != nil {
@@ -37,4 +37,11 @@ func (c *Client) setClientByToken(token string) (err error) {
 	}
 	c.textToSpeechClient = client
 	return
+}
+
+//go:generate mockgen -destination=gcp.mock.go -package=gcp -self_package=anki-support/infrastructure/gcp . GCPer
+type GCPer interface {
+	Close()
+	setClientByToken(token string) (err error)
+	GenerateAudioByText(inputText string, outputPath string, outputFileName string) (outputFilePath string, err error)
 }

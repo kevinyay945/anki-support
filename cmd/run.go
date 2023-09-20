@@ -10,6 +10,7 @@ import (
 	"anki-support/infrastructure/openai"
 	"fmt"
 	"github.com/atselvan/ankiconnect"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"path/filepath"
 )
@@ -25,7 +26,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		ankiClient := anki.NewClient()
+		ankiClient := anki.NewClient(log.New())
 		//deckName := "製作中日語卡片"
 		deckName := "日語單字"
 		noteList, err := ankiClient.GetTodoNoteFromDeck(deckName)
@@ -46,7 +47,7 @@ to quickly create a Cobra application.`,
 		for _, note := range noteList {
 			switch note.ModelName {
 			case "Japanese (recognition&recall)":
-				gcpClient := gcp.NewClient()
+				gcpClient := gcp.NewGCP()
 				defer gcpClient.Close()
 				fmt.Println(note.ModelName)
 				expression := note.Fields["Expression"].Value
@@ -71,7 +72,7 @@ to quickly create a Cobra application.`,
 					Order: note.Fields["ChineseNote"].Order,
 				}
 
-				ankiClient.EditNoteById(note, []ankiconnect.Audio{{
+				_ = ankiClient.EditNoteById(note, []ankiconnect.Audio{{
 					Path:     expressionVoicePath,
 					Filename: filepath.Base(expressionVoicePath),
 					Fields:   []string{"Sound"},
@@ -80,8 +81,8 @@ to quickly create a Cobra application.`,
 					Filename: filepath.Base(sentenceVoicePath),
 					Fields:   []string{"JapaneseSound"},
 				}}, nil, nil)
-				ankiClient.DeleteTagFromNote(note.NoteId, "anki-helper-vocabulary-todo")
-				ankiClient.AddTagFromNote(note.NoteId, "anki-helper-vocabulary-done")
+				_ = ankiClient.DeleteTagFromNote(note.NoteId, "anki-helper-vocabulary-todo")
+				_ = ankiClient.AddTagFromNote(note.NoteId, "anki-helper-vocabulary-done")
 			}
 		}
 	},

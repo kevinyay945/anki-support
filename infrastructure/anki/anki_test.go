@@ -13,7 +13,7 @@ import (
 type AnkiSuite struct {
 	suite.Suite
 	mockCtrl *gomock.Controller
-	client   *Client
+	client   Ankier
 }
 
 func TestSuiteInitAnki(t *testing.T) {

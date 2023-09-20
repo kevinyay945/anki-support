@@ -5,11 +5,16 @@ import (
 	openai "github.com/sashabaranov/go-openai"
 )
 
-type Client struct {
+type OpenAI struct {
 	openai *openai.Client
 }
 
-func NewClient() *Client {
+func NewClient() OpenAIer {
 	client := openai.NewClient(helper.Config.OpenAIToken())
-	return &Client{openai: client}
+	return &OpenAI{openai: client}
+}
+
+//go:generate mockgen -destination=openai.mock.go -package=openai -self_package=anki-support/infrastructure/openai . OpenAIer
+type OpenAIer interface {
+	MakeJapaneseSentence(rememberVocabularyList []string, vocabulary, meaning string) (japaneseOriginSentence, japaneseHiraganaSentence, traditionalChineseSentence string, err error)
 }
