@@ -3,6 +3,7 @@ package domain
 import (
 	"anki-support/infrastructure/anki"
 	"github.com/atselvan/ankiconnect"
+	"regexp"
 )
 
 type (
@@ -133,4 +134,32 @@ func (n Note) FromResultNotesInfo(note ankiconnect.ResultNotesInfo) (output Note
 	}
 	output.Id = note.NoteId
 	return
+}
+
+func (n Note) HasSound(s string) bool {
+	value := n.Fields[s].Value
+	pattern := `\[sound:([^\]]+)\]`
+	re := regexp.MustCompile(pattern)
+	matches := re.FindAllStringSubmatch(value, -1)
+	return matches != nil
+}
+
+func (n Note) HasValue(s string) bool {
+	value := n.Fields[s].Value
+	return value != ""
+}
+
+func (n Note) GetValue(s string) string {
+	value := n.Fields[s].Value
+
+	// 使用正規表達式來刪除 <!-- user_accent_start --> 和 <!-- user_accent_end --> 之間的內容
+	pattern := `<!-- user_accent_start -->(.*?)<!-- user_accent_end -->`
+	re := regexp.MustCompile(pattern)
+	result := re.ReplaceAllString(value, "")
+
+	// 刪除HTML標籤
+	reHTML := regexp.MustCompile(`<[^>]+>`)
+	result = reHTML.ReplaceAllString(result, "")
+
+	return result
 }
