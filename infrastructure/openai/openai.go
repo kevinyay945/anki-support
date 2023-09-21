@@ -14,7 +14,7 @@ func NewClient() OpenAIer {
 	return &OpenAI{openai: client}
 }
 
-//go:generate mockgen -destination=openai.mock.go -package=openai -self_package=anki-support/infrastructure/openai . OpenAIer
+//go:generate mockgen -destination=openai.mock.go -typed=true -package=openai -self_package=anki-support/infrastructure/openai . OpenAIer
 type OpenAIer interface {
 	MakeJapaneseSentence(rememberVocabularyList []string, vocabulary, meaning string) (japaneseOriginSentence, japaneseHiraganaSentence, traditionalChineseSentence string, err error)
 }

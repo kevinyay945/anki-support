@@ -4,13 +4,18 @@ import "github.com/spf13/viper"
 
 var Config Configer
 
-//go:generate mockgen -destination=config.mock.go -package=helper -self_package=2023_asset_management/helper . Configer
+//go:generate mockgen -destination=config.mock.go -typed=true -package=helper -self_package=2023_asset_management/helper . Configer
 type Configer interface {
 	GoogleApiToken() string
 	OpenAIToken() string
+	AssetPath() string
 }
 
 type config struct {
+}
+
+func (m *config) AssetPath() string {
+	return viper.GetString("ASSET_PATH")
 }
 
 func (m *config) OpenAIToken() string {

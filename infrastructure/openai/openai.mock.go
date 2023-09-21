@@ -45,7 +45,31 @@ func (m *MockOpenAIer) MakeJapaneseSentence(arg0 []string, arg1, arg2 string) (s
 }
 
 // MakeJapaneseSentence indicates an expected call of MakeJapaneseSentence.
-func (mr *MockOpenAIerMockRecorder) MakeJapaneseSentence(arg0, arg1, arg2 interface{}) *gomock.Call {
+func (mr *MockOpenAIerMockRecorder) MakeJapaneseSentence(arg0, arg1, arg2 interface{}) *OpenAIerMakeJapaneseSentenceCall {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MakeJapaneseSentence", reflect.TypeOf((*MockOpenAIer)(nil).MakeJapaneseSentence), arg0, arg1, arg2)
+	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MakeJapaneseSentence", reflect.TypeOf((*MockOpenAIer)(nil).MakeJapaneseSentence), arg0, arg1, arg2)
+	return &OpenAIerMakeJapaneseSentenceCall{Call: call}
+}
+
+// OpenAIerMakeJapaneseSentenceCall wrap *gomock.Call
+type OpenAIerMakeJapaneseSentenceCall struct {
+	*gomock.Call
+}
+
+// Return rewrite *gomock.Call.Return
+func (c *OpenAIerMakeJapaneseSentenceCall) Return(arg0, arg1, arg2 string, arg3 error) *OpenAIerMakeJapaneseSentenceCall {
+	c.Call = c.Call.Return(arg0, arg1, arg2, arg3)
+	return c
+}
+
+// Do rewrite *gomock.Call.Do
+func (c *OpenAIerMakeJapaneseSentenceCall) Do(f func([]string, string, string) (string, string, string, error)) *OpenAIerMakeJapaneseSentenceCall {
+	c.Call = c.Call.Do(f)
+	return c
+}
+
+// DoAndReturn rewrite *gomock.Call.DoAndReturn
+func (c *OpenAIerMakeJapaneseSentenceCall) DoAndReturn(f func([]string, string, string) (string, string, string, error)) *OpenAIerMakeJapaneseSentenceCall {
+	c.Call = c.Call.DoAndReturn(f)
+	return c
 }

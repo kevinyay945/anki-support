@@ -35,6 +35,7 @@ func (t *GPTSuite) Test_make_japanese_sentence() {
 	japaneseOriginSentence := "origin sentence"
 	japaneseHiraganaSentence := "hiragana sentence"
 	traditionalChineseSentence := "chinese sentence"
+
 	var err error
 
 	t.mockOpenAIer.EXPECT().

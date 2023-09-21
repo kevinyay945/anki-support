@@ -240,7 +240,7 @@ func NewAnkiError(err *errors.RestErr) error {
 	return fmt.Errorf("status: %d, message: %s, error: %s", err.StatusCode, err.Message, err.Error)
 }
 
-//go:generate mockgen -destination=anki.mock.go -package=anki -self_package=anki-support/infrastructure/anki . Ankier
+//go:generate mockgen -destination=anki.mock.go -typed=true -package=anki -self_package=anki-support/infrastructure/anki . Ankier
 type Ankier interface {
 	Ping() (err error)
 	GetAllDeck() ([]string, error)

@@ -5,6 +5,7 @@ go 1.21.0
 require (
 	cloud.google.com/go/texttospeech v1.7.1
 	github.com/atselvan/ankiconnect v1.1.0
+	github.com/golang/mock v1.6.0
 	github.com/imroc/req/v3 v3.41.12
 	github.com/privatesquare/bkst-go-utils v1.5.4
 	github.com/sashabaranov/go-openai v1.15.2
@@ -35,7 +36,6 @@ require (
 	github.com/go-resty/resty/v2 v2.7.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
-	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/pprof v0.0.0-20230901174712-0191c66da455 // indirect
@@ -66,7 +66,6 @@ require (
 	github.com/spf13/cast v1.5.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.5.1 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
 	go.opencensus.io v0.24.0 // indirect
