@@ -2,6 +2,7 @@ package anki
 
 import "regexp"
 
+//go:generate mockgen -destination=ankier.mock.go -typed=true -package=anki -self_package=anki-support/domain/anki . Ankier
 type Ankier interface {
 	GetNoteListByDeckName(deckName string) (output []Note, err error)
 	GetNoteById(noteId int64) (output Note, err error)

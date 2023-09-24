@@ -72,6 +72,7 @@ func (a *Anki) GetNoteListByDeckName(s string) (output []anki2.Note, err error) 
 	}
 	return
 }
+
 func GetNoteFromResultNotesInfo(note ankiconnect.ResultNotesInfo) (output anki2.Note) {
 	output.ModelName = note.ModelName
 	output.Tags = note.Tags
