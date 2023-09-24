@@ -4,13 +4,28 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c2b5569-fc02-4d72-b3d7-239692454973" name="Changes" comment="refactor: move domain and infrastructure folder">
-      <change afterPath="$PROJECT_DIR$/domain/anki/anki_operator.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/anki/operator.go" afterDir="false" />
+    <list default="true" id="2c2b5569-fc02-4d72-b3d7-239692454973" name="Changes" comment="testcase: add normal operator test case&#10;refactor: change lib get todo note to get note by tag name">
+      <change afterPath="$PROJECT_DIR$/domain/gpter.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/gpter.mock.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/operator_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/text_to_speecher.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/text_to_speecher.mock.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki/anki_operation_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/anki/anki_operator_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki/ankier.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/anki/ankier.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/run.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/anki/anki_operator.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/anki_operator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/anki/anki_operator_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/anki_operator_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/anki/ankier.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/ankier.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/anki/ankier.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/ankier.mock.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/anki/note_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/note_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/anki/operator.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/operator.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/anki.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/anki.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/anki_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/anki_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/gpt.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gpt.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/gpt_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gpt_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/text_to_speech.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/text_to_speech.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/anki/anki.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/anki/anki.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki.mock.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/anki/anki_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +95,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="GoMoveDeclarationDialog.RECENT_KEY">
+      <recent name="$PROJECT_DIR$/domain" />
       <recent name="$PROJECT_DIR$/domain/anki" />
       <recent name="$PROJECT_DIR$/domain/v1" />
     </key>
@@ -91,64 +107,65 @@
       <recent name="$PROJECT_DIR$/helper" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/domain" />
       <recent name="$PROJECT_DIR$/domain/anki" />
       <recent name="$PROJECT_DIR$/infrastructure" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.Test_get_correct_modal_type in anki-support/domain/anki">
-    <configuration name="Test_anki_note_column_get_column_and_get_value_only in anki-support/domain/v1" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.TextToSpeechSuite in anki-support/infrastructure">
+    <configuration name="AnkiSuite in anki-support/infrastructure" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/domain/v1" />
-      <parameters value=" -testify.m ^Test_anki_note_column_get_column_and_get_value_only$" />
+      <working_directory value="$PROJECT_DIR$/infrastructure" />
+      <parameters value=" -testify.m ^Test_get_note_list_by_deck_name|Test_get_note_by_id|Test_get_todo_noteFromDeck|Test_update_note_and_audio$" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="anki-support/domain/v1" />
+      <package value="anki-support/infrastructure" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitAnki\E$/^\QTest_anki_note_column_get_column_and_get_value_only\E$" />
+      <pattern value="^\QTestSuiteInitAnki\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_get_correct_modal_type in anki-support/domain/anki" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="GPTSuite in anki-support/infrastructure" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="anki-support" />
+      <working_directory value="$PROJECT_DIR$/infrastructure" />
+      <parameters value=" -testify.m ^Test_make_japanese_sentence$" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="anki-support/infrastructure" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestSuiteInitGPT\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_normal_operator in anki-support/domain" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="anki-support" />
+      <working_directory value="$PROJECT_DIR$/domain" />
+      <parameters value=" -testify.m ^Test_normal_operator$" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="anki-support/domain" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestSuiteInitOperator\E$/^\QTest_normal_operator\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_normal_operator in anki-support/domain/anki" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="anki-support" />
       <working_directory value="$PROJECT_DIR$/domain/anki" />
-      <parameters value=" -testify.m ^Test_get_correct_modal_type$" />
+      <parameters value=" -testify.m ^Test_normal_operator$" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
       <package value="anki-support/domain/anki" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitAnkiOperation\E$/^\QTest_get_correct_modal_type\E$" />
+      <pattern value="^\QTestSuiteInitOperator\E$/^\QTest_normal_operator\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_make_japanese_sentence in anki-support/domain/v1" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/domain/v1" />
-      <parameters value=" -testify.m ^Test_make_japanese_sentence$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/domain/v1" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitGPT\E$/^\QTest_make_japanese_sentence\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_text_to_japanese_speech in anki-support/domain/v1" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/domain/v1" />
-      <parameters value=" -testify.m ^Test_text_to_japanese_speech$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/domain/v1" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitTextToSpeech\E$/^\QTest_text_to_japanese_speech\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_text_to_japanese_speech in anki-support/infrastructure" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TextToSpeechSuite in anki-support/infrastructure" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="anki-support" />
       <working_directory value="$PROJECT_DIR$/infrastructure" />
       <parameters value=" -testify.m ^Test_text_to_japanese_speech$" />
@@ -158,16 +175,16 @@
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitTextToSpeech\E$/^\QTest_text_to_japanese_speech\E$" />
+      <pattern value="^\QTestSuiteInitTextToSpeech\E$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.Test_get_correct_modal_type in anki-support/domain/anki" />
-        <item itemvalue="Go Test.Test_text_to_japanese_speech in anki-support/infrastructure" />
-        <item itemvalue="Go Test.Test_text_to_japanese_speech in anki-support/domain/v1" />
-        <item itemvalue="Go Test.Test_make_japanese_sentence in anki-support/domain/v1" />
-        <item itemvalue="Go Test.Test_anki_note_column_get_column_and_get_value_only in anki-support/domain/v1" />
+        <item itemvalue="Go Test.TextToSpeechSuite in anki-support/infrastructure" />
+        <item itemvalue="Go Test.GPTSuite in anki-support/infrastructure" />
+        <item itemvalue="Go Test.AnkiSuite in anki-support/infrastructure" />
+        <item itemvalue="Go Test.Test_normal_operator in anki-support/domain" />
+        <item itemvalue="Go Test.Test_normal_operator in anki-support/domain/anki" />
       </list>
     </recent_temporary>
   </component>
@@ -196,7 +213,9 @@
     <MESSAGE value="feat: domain text to speech" />
     <MESSAGE value="rename: JapaneseSound to GetJapaneseSound" />
     <MESSAGE value="refactor: move domain and infrastructure folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: move domain and infrastructure folder" />
+    <MESSAGE value="feat: domain anki_operator and test case" />
+    <MESSAGE value="testcase: add normal operator test case&#10;refactor: change lib get todo note to get note by tag name" />
+    <option name="LAST_COMMIT_MESSAGE" value="testcase: add normal operator test case&#10;refactor: change lib get todo note to get note by tag name" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

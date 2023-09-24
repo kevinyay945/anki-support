@@ -17,7 +17,3 @@ func (s *TextToSpeech) GetJapaneseSound(japaneseText string) (filePath string, e
 	filePath, err = s.gcp.GenerateAudioByText(japaneseText, outputFolder, fmt.Sprintf("%s.mp3", japaneseText))
 	return
 }
-
-type TextToSpeecher interface {
-	GetJapaneseSound(japaneseText string) (filePath string, err error)
-}

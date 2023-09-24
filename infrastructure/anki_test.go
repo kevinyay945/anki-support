@@ -1,7 +1,7 @@
 package infrastructure
 
 import (
-	anki2 "anki-support/domain/anki"
+	"anki-support/domain"
 	"anki-support/lib/anki"
 	"github.com/atselvan/ankiconnect"
 	"github.com/stretchr/testify/suite"
@@ -12,7 +12,7 @@ import (
 type AnkiSuite struct {
 	suite.Suite
 	mockCtrl   *gomock.Controller
-	anki       anki2.Ankier
+	anki       domain.Ankier
 	mockAnkier *anki.MockAnkier
 }
 
@@ -36,7 +36,7 @@ func (t *AnkiSuite) Test_get_note_list_by_deck_name() {
 		Return([]ankiconnect.ResultNotesInfo{resultNotesInfo}, nil)
 	note, err := t.anki.GetNoteListByDeckName("deckName")
 	t.Equal(nil, err)
-	t.Equal([]anki2.Note{exampleNote}, note)
+	t.Equal([]domain.Note{exampleNote}, note)
 }
 
 func (t *AnkiSuite) Test_get_note_by_id() {
@@ -50,10 +50,10 @@ func (t *AnkiSuite) Test_get_note_by_id() {
 func (t *AnkiSuite) Test_get_todo_noteFromDeck() {
 	deckName := "deckName"
 	domainNote, notesInfo := t.getInfrastructureAndDomainNote()
-	t.mockAnkier.EXPECT().GetTodoNoteFromDeck(deckName).Return([]ankiconnect.ResultNotesInfo{notesInfo}, nil)
+	t.mockAnkier.EXPECT().GetNoteFromDeckByTagName(deckName, domain.AnkiTodoTagName).Return([]ankiconnect.ResultNotesInfo{notesInfo}, nil)
 	noteList, err := t.anki.GetTodoNoteFromDeck(deckName)
 	t.Equal(nil, err)
-	t.Equal([]anki2.Note{domainNote}, noteList)
+	t.Equal([]domain.Note{domainNote}, noteList)
 }
 
 func (t *AnkiSuite) Test_update_note_and_audio() {
@@ -68,7 +68,7 @@ func (t *AnkiSuite) Test_update_note_and_audio() {
 		SkipHash: "",
 		Fields:   []string{"Meaning"},
 	}}, nil, nil)
-	err = t.anki.UpdateNoteById(456, domainNote, []anki2.Audio{
+	err = t.anki.UpdateNoteById(456, domainNote, []domain.Audio{
 		{
 			URL:      "url audio link",
 			Data:     "base64 audio",
@@ -81,7 +81,7 @@ func (t *AnkiSuite) Test_update_note_and_audio() {
 	t.NoError(err)
 }
 
-func (t *AnkiSuite) getInfrastructureAndDomainNote() (anki2.Note, ankiconnect.ResultNotesInfo) {
+func (t *AnkiSuite) getInfrastructureAndDomainNote() (domain.Note, ankiconnect.ResultNotesInfo) {
 	noteId := int64(123)
 	modelName := "model"
 	fieldData := map[string]struct {
@@ -94,10 +94,10 @@ func (t *AnkiSuite) getInfrastructureAndDomainNote() (anki2.Note, ankiconnect.Re
 		},
 	}
 	tags := []string{"tag1", "tag2"}
-	exampleNote := anki2.Note{
+	exampleNote := domain.Note{
 		Id:        noteId,
 		ModelName: modelName,
-		Fields:    map[string]anki2.FieldData{},
+		Fields:    map[string]domain.FieldData{},
 		Tags:      tags,
 	}
 	exampleResultNotesInfo := ankiconnect.ResultNotesInfo{
@@ -107,7 +107,7 @@ func (t *AnkiSuite) getInfrastructureAndDomainNote() (anki2.Note, ankiconnect.Re
 		Tags:      tags,
 	}
 	for key, data := range fieldData {
-		exampleNote.Fields[key] = anki2.FieldData{
+		exampleNote.Fields[key] = domain.FieldData{
 			data.Value, data.Order,
 		}
 		exampleResultNotesInfo.Fields[key] = ankiconnect.FieldData{

@@ -4,15 +4,8 @@ Copyright © 2023 Kevin Chen
 package cmd
 
 import (
-	"anki-support/helper"
-	"anki-support/lib/anki"
-	"anki-support/lib/gcp"
-	"anki-support/lib/openai"
 	"fmt"
-	"github.com/atselvan/ankiconnect"
-	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"path/filepath"
 )
 
 // runCmd represents the run command
@@ -26,65 +19,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		ankiClient := anki.NewClient(log.New())
-		//deckName := "製作中日語卡片"
-		deckName := "日語單字"
-		noteList, err := ankiClient.GetTodoNoteFromDeck(deckName)
-		if err != nil {
-			fmt.Printf("GetTodoNoteFromDeck, %s", err.Error())
-			return
-		}
-		allNoteList, err := ankiClient.GetTodoNoteFromDeck(deckName)
-		if err != nil {
-			fmt.Printf("GetTodoNoteFromDeck, %s", err.Error())
-			return
-		}
-		allVocabularyList := []string{}
-		for _, note := range allNoteList {
-			allVocabularyList = append(allVocabularyList, note.Fields["Expression"].Value)
-		}
-
-		for _, note := range noteList {
-			switch note.ModelName {
-			case "Japanese (recognition&recall)":
-				gcpClient := gcp.NewGCP()
-				defer gcpClient.Close()
-				fmt.Println(note.ModelName)
-				expression := note.Fields["Expression"].Value
-				reading := note.Fields["Reading"].Value
-				meaning := note.Fields["Meaning"].Value
-				path, _ := helper.GetCurrentExecutableFolderPath()
-				tempAssetPath := filepath.Join(path, "temp")
-				expressionVoicePath, _ := gcpClient.GenerateAudioByText(expression, tempAssetPath, expression)
-
-				openAIClient := openai.NewClient()
-				sentence, hiraganaSentence, chineseSentence, err := openAIClient.MakeJapaneseSentence(allVocabularyList, reading, meaning)
-				if err != nil {
-					continue
-				}
-				sentenceVoicePath, _ := gcpClient.GenerateAudioByText(sentence, tempAssetPath, sentence)
-				note.Fields["JapaneseNote"] = ankiconnect.FieldData{
-					Value: hiraganaSentence,
-					Order: note.Fields["JapaneseNote"].Order,
-				}
-				note.Fields["ChineseNote"] = ankiconnect.FieldData{
-					Value: chineseSentence,
-					Order: note.Fields["ChineseNote"].Order,
-				}
-
-				_ = ankiClient.EditNoteById(note, []ankiconnect.Audio{{
-					Path:     expressionVoicePath,
-					Filename: filepath.Base(expressionVoicePath),
-					Fields:   []string{"Sound"},
-				}, {
-					Path:     sentenceVoicePath,
-					Filename: filepath.Base(sentenceVoicePath),
-					Fields:   []string{"JapaneseSound"},
-				}}, nil, nil)
-				_ = ankiClient.DeleteTagFromNote(note.NoteId, "anki-helper-vocabulary-todo")
-				_ = ankiClient.AddTagFromNote(note.NoteId, "anki-helper-vocabulary-done")
-			}
-		}
+		fmt.Printf("hello world")
 	},
 }
 

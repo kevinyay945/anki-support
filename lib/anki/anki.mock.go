@@ -304,41 +304,41 @@ func (c *AnkierGetNoteByIdCall) DoAndReturn(f func(int64) (ankiconnect.ResultNot
 	return c
 }
 
-// GetTodoNoteFromDeck mocks base method.
-func (m *MockAnkier) GetTodoNoteFromDeck(arg0 string) ([]ankiconnect.ResultNotesInfo, error) {
+// GetNoteFromDeckByTagName mocks base method.
+func (m *MockAnkier) GetNoteFromDeckByTagName(arg0, arg1 string) ([]ankiconnect.ResultNotesInfo, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetTodoNoteFromDeck", arg0)
+	ret := m.ctrl.Call(m, "GetNoteFromDeckByTagName", arg0, arg1)
 	ret0, _ := ret[0].([]ankiconnect.ResultNotesInfo)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetTodoNoteFromDeck indicates an expected call of GetTodoNoteFromDeck.
-func (mr *MockAnkierMockRecorder) GetTodoNoteFromDeck(arg0 interface{}) *AnkierGetTodoNoteFromDeckCall {
+// GetNoteFromDeckByTagName indicates an expected call of GetNoteFromDeckByTagName.
+func (mr *MockAnkierMockRecorder) GetNoteFromDeckByTagName(arg0, arg1 interface{}) *AnkierGetNoteFromDeckByTagNameCall {
 	mr.mock.ctrl.T.Helper()
-	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTodoNoteFromDeck", reflect.TypeOf((*MockAnkier)(nil).GetTodoNoteFromDeck), arg0)
-	return &AnkierGetTodoNoteFromDeckCall{Call: call}
+	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNoteFromDeckByTagName", reflect.TypeOf((*MockAnkier)(nil).GetNoteFromDeckByTagName), arg0, arg1)
+	return &AnkierGetNoteFromDeckByTagNameCall{Call: call}
 }
 
-// AnkierGetTodoNoteFromDeckCall wrap *gomock.Call
-type AnkierGetTodoNoteFromDeckCall struct {
+// AnkierGetNoteFromDeckByTagNameCall wrap *gomock.Call
+type AnkierGetNoteFromDeckByTagNameCall struct {
 	*gomock.Call
 }
 
 // Return rewrite *gomock.Call.Return
-func (c *AnkierGetTodoNoteFromDeckCall) Return(arg0 []ankiconnect.ResultNotesInfo, arg1 error) *AnkierGetTodoNoteFromDeckCall {
+func (c *AnkierGetNoteFromDeckByTagNameCall) Return(arg0 []ankiconnect.ResultNotesInfo, arg1 error) *AnkierGetNoteFromDeckByTagNameCall {
 	c.Call = c.Call.Return(arg0, arg1)
 	return c
 }
 
 // Do rewrite *gomock.Call.Do
-func (c *AnkierGetTodoNoteFromDeckCall) Do(f func(string) ([]ankiconnect.ResultNotesInfo, error)) *AnkierGetTodoNoteFromDeckCall {
+func (c *AnkierGetNoteFromDeckByTagNameCall) Do(f func(string, string) ([]ankiconnect.ResultNotesInfo, error)) *AnkierGetNoteFromDeckByTagNameCall {
 	c.Call = c.Call.Do(f)
 	return c
 }
 
 // DoAndReturn rewrite *gomock.Call.DoAndReturn
-func (c *AnkierGetTodoNoteFromDeckCall) DoAndReturn(f func(string) ([]ankiconnect.ResultNotesInfo, error)) *AnkierGetTodoNoteFromDeckCall {
+func (c *AnkierGetNoteFromDeckByTagNameCall) DoAndReturn(f func(string, string) ([]ankiconnect.ResultNotesInfo, error)) *AnkierGetNoteFromDeckByTagNameCall {
 	c.Call = c.Call.DoAndReturn(f)
 	return c
 }

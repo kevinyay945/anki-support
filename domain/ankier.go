@@ -1,12 +1,15 @@
-package anki
+package domain
 
 import "regexp"
 
-//go:generate mockgen -destination=ankier.mock.go -typed=true -package=anki -self_package=anki-support/domain/anki . Ankier
+//go:generate mockgen -destination=ankier.mock.go -typed=true -package=domain -self_package=anki-support/domain . Ankier
 type Ankier interface {
 	GetNoteListByDeckName(deckName string) (output []Note, err error)
 	GetNoteById(noteId int64) (output Note, err error)
 	GetTodoNoteFromDeck(deckName string) (output []Note, err error)
+	AddNoteTagFromNoteId(NoteId int64, tagName string) (err error)
+	DeleteNoteTagFromNoteId(NoteId int64, tagName string) (err error)
+	// UpdateNoteById can't update tag at the same time
 	UpdateNoteById(noteId int64, note Note, audioList []Audio) (err error)
 }
 
@@ -52,6 +55,9 @@ type (
 		Fields   []string `json:"fields,omitempty"`
 	}
 )
+
+const AnkiTodoTagName = "anki-helper-vocabulary-todo"
+const AnkiDoneTagName = "anki-helper-vocabulary-done"
 
 func (n Note) HasSound(s string) bool {
 	value := n.Fields[s].Value

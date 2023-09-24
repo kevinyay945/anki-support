@@ -17,6 +17,11 @@ type Anki struct {
 	log           *logrus.Entry
 }
 
+func (c *Anki) GetNoteFromDeckByTagName(deckName string, tagName string) ([]ankiconnect.ResultNotesInfo, error) {
+	get, err := c.ankiConnect.Notes.Get(fmt.Sprintf("tag:%s deck:%s", tagName, deckName))
+	return *get, NewAnkiError(err)
+}
+
 func NewClient(log *logrus.Logger) Ankier {
 	field := log.WithField("lib", "anki")
 	c := &Anki{log: field}
@@ -43,12 +48,6 @@ func (c *Anki) GetAllDeck() ([]string, error) {
 
 func (c *Anki) GetAllNoteFromDeck(name string) ([]ankiconnect.ResultNotesInfo, error) {
 	get, err := c.ankiConnect.Notes.Get(fmt.Sprintf("deck:%s", name))
-	return *get, NewAnkiError(err)
-}
-
-func (c *Anki) GetTodoNoteFromDeck(deckName string) ([]ankiconnect.ResultNotesInfo, error) {
-	todoTag := "anki-helper-vocabulary-todo"
-	get, err := c.ankiConnect.Notes.Get(fmt.Sprintf("tag:%s deck:%s", todoTag, deckName))
 	return *get, NewAnkiError(err)
 }
 
@@ -245,7 +244,7 @@ type Ankier interface {
 	Ping() (err error)
 	GetAllDeck() ([]string, error)
 	GetAllNoteFromDeck(name string) ([]ankiconnect.ResultNotesInfo, error)
-	GetTodoNoteFromDeck(deckName string) ([]ankiconnect.ResultNotesInfo, error)
+	GetNoteFromDeckByTagName(deckName string, tagName string) ([]ankiconnect.ResultNotesInfo, error)
 	GetMediaFolderPath() (string, error)
 	EditNoteById(
 		note ankiconnect.ResultNotesInfo,

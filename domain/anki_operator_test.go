@@ -1,4 +1,4 @@
-package anki
+package domain
 
 import (
 	"github.com/stretchr/testify/suite"

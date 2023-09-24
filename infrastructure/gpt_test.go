@@ -1,6 +1,7 @@
 package infrastructure
 
 import (
+	"anki-support/domain"
 	"anki-support/lib/openai"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/mock/gomock"
@@ -11,7 +12,7 @@ type GPTSuite struct {
 	suite.Suite
 	mockCtrl     *gomock.Controller
 	mockOpenAIer *openai.MockOpenAIer
-	gpt          GPTer
+	gpt          domain.GPTer
 }
 
 func TestSuiteInitGPT(t *testing.T) {
