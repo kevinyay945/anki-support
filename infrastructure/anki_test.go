@@ -36,7 +36,7 @@ func (t *AnkiSuite) Test_get_note_list_by_deck_name() {
 		Return([]ankiconnect.ResultNotesInfo{resultNotesInfo}, nil)
 	note, err := t.anki.GetNoteListByDeckName("deckName")
 	t.Equal(nil, err)
-	t.Equal([]domain.Note{exampleNote}, note)
+	t.Equal([]domain.AnkiNote{exampleNote}, note)
 }
 
 func (t *AnkiSuite) Test_get_note_by_id() {
@@ -53,7 +53,7 @@ func (t *AnkiSuite) Test_get_todo_noteFromDeck() {
 	t.mockAnkier.EXPECT().GetNoteFromDeckByTagName(deckName, domain.AnkiTodoTagName).Return([]ankiconnect.ResultNotesInfo{notesInfo}, nil)
 	noteList, err := t.anki.GetTodoNoteFromDeck(deckName)
 	t.Equal(nil, err)
-	t.Equal([]domain.Note{domainNote}, noteList)
+	t.Equal([]domain.AnkiNote{domainNote}, noteList)
 }
 
 func (t *AnkiSuite) Test_update_note_and_audio() {
@@ -81,7 +81,7 @@ func (t *AnkiSuite) Test_update_note_and_audio() {
 	t.NoError(err)
 }
 
-func (t *AnkiSuite) getInfrastructureAndDomainNote() (domain.Note, ankiconnect.ResultNotesInfo) {
+func (t *AnkiSuite) getInfrastructureAndDomainNote() (domain.AnkiNote, ankiconnect.ResultNotesInfo) {
 	noteId := int64(123)
 	modelName := "model"
 	fieldData := map[string]struct {
@@ -94,7 +94,7 @@ func (t *AnkiSuite) getInfrastructureAndDomainNote() (domain.Note, ankiconnect.R
 		},
 	}
 	tags := []string{"tag1", "tag2"}
-	exampleNote := domain.Note{
+	exampleNote := domain.AnkiNote{
 		Id:        noteId,
 		ModelName: modelName,
 		Fields:    map[string]domain.FieldData{},

@@ -4,218 +4,52 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c2b5569-fc02-4d72-b3d7-239692454973" name="Changes" comment="testcase: add normal operator test case&#10;refactor: change lib get todo note to get note by tag name">
-      <change afterPath="$PROJECT_DIR$/domain/gpter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/gpter.mock.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/operator_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/text_to_speecher.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/text_to_speecher.mock.go" afterDir="false" />
+    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/run.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki/anki_operator.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/anki_operator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki/anki_operator_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/anki_operator_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki/ankier.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/ankier.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki/ankier.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/ankier.mock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki/note_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/note_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki/operator.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/operator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/anki.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/anki.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/anki_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/anki_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/gpt.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gpt.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/gpt_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gpt_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/text_to_speech.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/text_to_speech.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/anki/anki.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/anki/anki.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki.mock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/anki/anki_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Go File" />
-      </list>
-    </option>
-  </component>
   <component name="GOROOT" url="file://$USER_HOME$/.gvm/gos/go1.21" />
   <component name="Git.Settings">
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;kevinyay945&quot;
-  }
-}</component>
-  <component name="GitToolBoxStore">
-    <option name="projectConfigVersion" value="5" />
-  </component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="d7062949-9de7-4681-9e74-38ed0169598d" />
-        <option name="url" value="git@github.com:kevinyay945/anki-support.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
-  <component name="ProjectId" id="2VTKrd66isKFgtYW91rVxDpEsbq" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2Vqi13Hb7GA3Be08w99aI4ZX5Fk" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kevin&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/kevin",
+    "settings.editor.selected.configurable": "preferences.fileTypes"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="GoMoveDeclarationDialog.RECENT_KEY">
-      <recent name="$PROJECT_DIR$/domain" />
-      <recent name="$PROJECT_DIR$/domain/anki" />
-      <recent name="$PROJECT_DIR$/domain/v1" />
-    </key>
-    <key name="GoExtractInterfaceDialog.RECENT_KEY">
-      <recent name="$PROJECT_DIR$/domain/anki" />
-      <recent name="$PROJECT_DIR$/domain/v1" />
-      <recent name="$PROJECT_DIR$/infrastructure/openai" />
-      <recent name="$PROJECT_DIR$/infrastructure/gcp" />
-      <recent name="$PROJECT_DIR$/helper" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/domain" />
-      <recent name="$PROJECT_DIR$/domain/anki" />
-      <recent name="$PROJECT_DIR$/infrastructure" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Go Test.TextToSpeechSuite in anki-support/infrastructure">
-    <configuration name="AnkiSuite in anki-support/infrastructure" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/infrastructure" />
-      <parameters value=" -testify.m ^Test_get_note_list_by_deck_name|Test_get_note_by_id|Test_get_todo_noteFromDeck|Test_update_note_and_audio$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/infrastructure" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitAnki\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="GPTSuite in anki-support/infrastructure" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/infrastructure" />
-      <parameters value=" -testify.m ^Test_make_japanese_sentence$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/infrastructure" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitGPT\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_normal_operator in anki-support/domain" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/domain" />
-      <parameters value=" -testify.m ^Test_normal_operator$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/domain" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitOperator\E$/^\QTest_normal_operator\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_normal_operator in anki-support/domain/anki" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/domain/anki" />
-      <parameters value=" -testify.m ^Test_normal_operator$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/domain/anki" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitOperator\E$/^\QTest_normal_operator\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TextToSpeechSuite in anki-support/infrastructure" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/infrastructure" />
-      <parameters value=" -testify.m ^Test_text_to_japanese_speech$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/infrastructure" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitTextToSpeech\E$" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Go Test.TextToSpeechSuite in anki-support/infrastructure" />
-        <item itemvalue="Go Test.GPTSuite in anki-support/infrastructure" />
-        <item itemvalue="Go Test.AnkiSuite in anki-support/infrastructure" />
-        <item itemvalue="Go Test.Test_normal_operator in anki-support/domain" />
-        <item itemvalue="Go Test.Test_normal_operator in anki-support/domain/anki" />
-      </list>
-    </recent_temporary>
-  </component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
-    <MESSAGE value="improve: edit anki audio file can overwrite origin file" />
-    <MESSAGE value="feat: add anki domain" />
-    <MESSAGE value="test: add mock file" />
-    <MESSAGE value="feat: add domain note method" />
-    <MESSAGE value="feat: domain gpt make japanese sentence" />
-    <MESSAGE value="feat: domain text to speech" />
-    <MESSAGE value="rename: JapaneseSound to GetJapaneseSound" />
-    <MESSAGE value="refactor: move domain and infrastructure folder" />
-    <MESSAGE value="feat: domain anki_operator and test case" />
-    <MESSAGE value="testcase: add normal operator test case&#10;refactor: change lib get todo note to get note by tag name" />
-    <option name="LAST_COMMIT_MESSAGE" value="testcase: add normal operator test case&#10;refactor: change lib get todo note to get note by tag name" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

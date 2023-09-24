@@ -12,7 +12,7 @@ func NewOperatorGenerate(gpter GPTer, textToSpeecher TextToSpeecher, ankier Anki
 	return &OperatorGenerate{gpter: gpter, textToSpeecher: textToSpeecher, ankier: ankier}
 }
 
-func (g *OperatorGenerate) GetByNote(note Note) (o Operator, err error) {
+func (g *OperatorGenerate) GetByNote(note AnkiNote) (o Operator, err error) {
 	switch note.ModelName {
 	case "Japanese (recognition&recall) 動詞篇":
 		o = &VerbOperator{
@@ -42,5 +42,5 @@ func (g *OperatorGenerate) GetByNote(note Note) (o Operator, err error) {
 }
 
 type OperatorGenerator interface {
-	GetByNote(note Note) (o Operator, err error)
+	GetByNote(note AnkiNote) (o Operator, err error)
 }

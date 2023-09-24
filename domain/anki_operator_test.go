@@ -24,7 +24,7 @@ func (t *AnkiOperationSuite) TearDownTest() {
 }
 
 func (t *AnkiOperationSuite) Test_get_correct_modal_type_operator() {
-	note := Note{
+	note := AnkiNote{
 		ModelName: "Japanese (recognition&recall)",
 	}
 	generator := OperatorGenerate{}
@@ -32,7 +32,7 @@ func (t *AnkiOperationSuite) Test_get_correct_modal_type_operator() {
 	_, ok := normalOperator.(*NormalOperator)
 	t.True(ok, "type is not *NormalOperator")
 
-	note = Note{
+	note = AnkiNote{
 		ModelName: "Japanese (recognition&recall) 動詞篇",
 	}
 	generator = OperatorGenerate{}
@@ -40,7 +40,7 @@ func (t *AnkiOperationSuite) Test_get_correct_modal_type_operator() {
 	_, ok = verbOperator.(*VerbOperator)
 	t.True(ok, "type is not *VerbOperator")
 
-	note = Note{
+	note = AnkiNote{
 		ModelName: "Japanese (recognition&recall) 形容詞",
 	}
 	generator = OperatorGenerate{}

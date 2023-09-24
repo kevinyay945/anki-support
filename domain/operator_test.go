@@ -45,7 +45,7 @@ func (t *OperatorSuite) Test_normal_operator() {
 		"Japanese-ToChineseNote":     {Value: "test japanese to chinese note value"},
 		"Answer-Note":                {Value: "test answer note value"},
 	}
-	note := Note{
+	note := AnkiNote{
 		Id:        123,
 		ModelName: "Japanese (recognition&recall)",
 		Fields:    fields,
@@ -87,7 +87,7 @@ func (t *OperatorSuite) Test_normal_operator() {
 	// add done tag at anki card
 	t.mockAnkier.EXPECT().AddNoteTagFromNoteId(note.Id, AnkiDoneTagName).Return(nil)
 
-	operator, err := t.generator.GetByNote(Note{
+	operator, err := t.generator.GetByNote(AnkiNote{
 		Id:        note.Id,
 		ModelName: note.ModelName,
 		Fields: map[string]FieldData{

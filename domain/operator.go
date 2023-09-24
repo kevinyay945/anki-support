@@ -5,7 +5,7 @@ type Operator interface {
 }
 
 type NormalOperator struct {
-	Note           Note
+	Note           AnkiNote
 	gpter          GPTer
 	textToSpeecher TextToSpeecher
 	ankier         Ankier
@@ -16,7 +16,7 @@ func (n *NormalOperator) Do() error {
 }
 
 type VerbOperator struct {
-	Note           Note
+	Note           AnkiNote
 	gpter          GPTer
 	textToSpeecher TextToSpeecher
 	ankier         Ankier
@@ -28,7 +28,7 @@ func (v *VerbOperator) Do() error {
 }
 
 type AdjOperator struct {
-	Note           Note
+	Note           AnkiNote
 	gpter          GPTer
 	textToSpeecher TextToSpeecher
 	ankier         Ankier
