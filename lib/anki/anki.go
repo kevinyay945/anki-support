@@ -18,7 +18,7 @@ type Anki struct {
 }
 
 func NewClient(log *logrus.Logger) Ankier {
-	field := log.WithField("infrastructure", "anki")
+	field := log.WithField("lib", "anki")
 	c := &Anki{log: field}
 	c.ankiConnect = ankiconnect.NewClient()
 	c.httpClient = req.C()
@@ -240,7 +240,7 @@ func NewAnkiError(err *errors.RestErr) error {
 	return fmt.Errorf("status: %d, message: %s, error: %s", err.StatusCode, err.Message, err.Error)
 }
 
-//go:generate mockgen -destination=anki.mock.go -typed=true -package=anki -self_package=anki-support/infrastructure/anki . Ankier
+//go:generate mockgen -destination=anki.mock.go -typed=true -package=anki -self_package=anki-support/lib/anki . Ankier
 type Ankier interface {
 	Ping() (err error)
 	GetAllDeck() ([]string, error)

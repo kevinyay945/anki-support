@@ -1,8 +1,8 @@
-package domain
+package infrastructure
 
 import (
 	"anki-support/helper"
-	"anki-support/infrastructure/gcp"
+	"anki-support/lib/gcp"
 	"fmt"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/mock/gomock"
@@ -53,7 +53,7 @@ func (t *TextToSpeechSuite) Test_text_to_japanese_speech() {
 
 func (t *TextToSpeechSuite) settingHelperConfiger() {
 	mockConfiger := helper.NewMockConfiger(t.mockCtrl)
-	configData, _ := os.ReadFile("../../.config.dev.yaml")
+	configData, _ := os.ReadFile("../.config.dev.yaml")
 	config := struct {
 		Path string `yaml:"ASSET_PATH"`
 	}{}

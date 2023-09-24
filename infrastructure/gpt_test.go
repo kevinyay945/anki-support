@@ -1,7 +1,7 @@
-package domain
+package infrastructure
 
 import (
-	"anki-support/infrastructure/openai"
+	"anki-support/lib/openai"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/mock/gomock"
 	"testing"

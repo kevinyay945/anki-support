@@ -5,9 +5,9 @@ package cmd
 
 import (
 	"anki-support/helper"
-	"anki-support/infrastructure/anki"
-	"anki-support/infrastructure/gcp"
-	"anki-support/infrastructure/openai"
+	"anki-support/lib/anki"
+	"anki-support/lib/gcp"
+	"anki-support/lib/openai"
 	"fmt"
 	"github.com/atselvan/ankiconnect"
 	log "github.com/sirupsen/logrus"

@@ -39,7 +39,7 @@ func (c *GCP) setClientByToken(token string) (err error) {
 	return
 }
 
-//go:generate mockgen -destination=gcp.mock.go -typed=true -package=gcp -self_package=anki-support/infrastructure/gcp . GCPer
+//go:generate mockgen -destination=gcp.mock.go -typed=true -package=gcp -self_package=anki-support/lib/gcp . GCPer
 type GCPer interface {
 	Close()
 	setClientByToken(token string) (err error)

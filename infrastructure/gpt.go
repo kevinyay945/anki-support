@@ -1,6 +1,6 @@
-package domain
+package infrastructure
 
-import "anki-support/infrastructure/openai"
+import "anki-support/lib/openai"
 
 type GPT struct {
 	openAIer openai.OpenAIer

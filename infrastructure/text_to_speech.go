@@ -1,8 +1,8 @@
-package domain
+package infrastructure
 
 import (
 	"anki-support/helper"
-	"anki-support/infrastructure/gcp"
+	"anki-support/lib/gcp"
 	"fmt"
 	"path/filepath"
 )
