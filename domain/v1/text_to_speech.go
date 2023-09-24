@@ -11,7 +11,7 @@ type TextToSpeech struct {
 	gcp gcp.GCPer
 }
 
-func (s *TextToSpeech) JapaneseSound(japaneseText string) (filePath string, err error) {
+func (s *TextToSpeech) GetJapaneseSound(japaneseText string) (filePath string, err error) {
 	path := helper.Config.AssetPath()
 	outputFolder := filepath.Join(path, "japaneseSound")
 	filePath, err = s.gcp.GenerateAudioByText(japaneseText, outputFolder, fmt.Sprintf("%s.mp3", japaneseText))
@@ -19,5 +19,5 @@ func (s *TextToSpeech) JapaneseSound(japaneseText string) (filePath string, err 
 }
 
 type TextToSpeecher interface {
-	JapaneseSound(japaneseText string) (filePath string, err error)
+	GetJapaneseSound(japaneseText string) (filePath string, err error)
 }

@@ -4,22 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c2b5569-fc02-4d72-b3d7-239692454973" name="Changes" comment="feat: domain gpt make japanese sentence">
-      <change afterPath="$PROJECT_DIR$/domain/v1/text_to_speech.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/v1/text_to_speech_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.config.yaml" afterDir="false" />
+    <list default="true" id="2c2b5569-fc02-4d72-b3d7-239692454973" name="Changes" comment="feat: domain text to speech">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/v1/gpt_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/v1/gpt_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/helper/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper/config.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/helper/config.mock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/anki/anki.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/anki/anki.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/anki/anki.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/anki/anki.mock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/gcp/gcp.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gcp/gcp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/gcp/gcp.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gcp/gcp.mock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/openai/openai.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/openai/openai.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/openai/openai.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/openai/openai.mock.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/v1/text_to_speech.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/v1/text_to_speech.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/v1/text_to_speech_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/v1/text_to_speech_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +184,8 @@
     <MESSAGE value="test: add mock file" />
     <MESSAGE value="feat: add domain note method" />
     <MESSAGE value="feat: domain gpt make japanese sentence" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: domain gpt make japanese sentence" />
+    <MESSAGE value="feat: domain text to speech" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: domain text to speech" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

@@ -44,7 +44,7 @@ func (t *TextToSpeechSuite) Test_text_to_japanese_speech() {
 		outputFolder,
 		outputFileName,
 	).Return(filepath.Join(outputFolder, outputFileName), nil)
-	filePath, err := speech.JapaneseSound(
+	filePath, err := speech.GetJapaneseSound(
 		convertJapaneseText,
 	)
 	t.NoError(err)
