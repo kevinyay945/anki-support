@@ -12,29 +12,26 @@ func NewOperatorGenerate(gpter GPTer, textToSpeecher TextToSpeecher, ankier Anki
 	return &OperatorGenerate{gpter: gpter, textToSpeecher: textToSpeecher, ankier: ankier}
 }
 
-func (g *OperatorGenerate) GetByNote(note AnkiNote) (o Operator, err error) {
+func (g *OperatorGenerate) GetByNote(note AnkiNote, rememberVocabularyList []string) (o Operator, err error) {
 	switch note.ModelName {
 	case "Japanese (recognition&recall) 動詞篇":
 		o = &VerbOperator{
-			Note:           note,
-			gpter:          g.gpter,
-			textToSpeecher: g.textToSpeecher,
-			ankier:         g.ankier,
+			Note:                   note,
+			gpter:                  g.gpter,
+			textToSpeecher:         g.textToSpeecher,
+			ankier:                 g.ankier,
+			rememberVocabularyList: rememberVocabularyList,
 		}
 	case "Japanese (recognition&recall) 形容詞":
 		o = &AdjOperator{
-			Note:           note,
-			gpter:          g.gpter,
-			textToSpeecher: g.textToSpeecher,
-			ankier:         g.ankier,
+			Note:                   note,
+			gpter:                  g.gpter,
+			textToSpeecher:         g.textToSpeecher,
+			ankier:                 g.ankier,
+			rememberVocabularyList: rememberVocabularyList,
 		}
 	case "Japanese (recognition&recall)":
-		o = &NormalOperator{
-			Note:           note,
-			gpter:          g.gpter,
-			textToSpeecher: g.textToSpeecher,
-			ankier:         g.ankier,
-		}
+		o = NewNormalOperator(note, g.gpter, g.textToSpeecher, g.ankier, rememberVocabularyList)
 	default:
 		err = fmt.Errorf("don't support for this modelType: %s", note.ModelName)
 	}
@@ -42,5 +39,5 @@ func (g *OperatorGenerate) GetByNote(note AnkiNote) (o Operator, err error) {
 }
 
 type OperatorGenerator interface {
-	GetByNote(note AnkiNote) (o Operator, err error)
+	GetByNote(note AnkiNote, rememberVoculary []string) (o Operator, err error)
 }

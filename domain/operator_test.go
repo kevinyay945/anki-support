@@ -34,19 +34,19 @@ func (t *OperatorSuite) TearDownTest() {
 
 func (t *OperatorSuite) Test_normal_operator() {
 	fields := map[string]FieldData{
-		"Expression":                 {Value: "test expression value"},
-		"Meaning":                    {Value: "test meaning value"},
-		"Reading":                    {Value: "test reading value"},
-		"Japanese-ToSound":           {Value: "test japanese to sound value"},
-		"JapaneseSentence":           {Value: "test japanese hiragana sentence value"},
-		"JapaneseSentence-ToSound":   {Value: "test japanese sentence to sound value"},
-		"JapaneseSentence-ToChinese": {Value: "test japanese sentence to chinese value"},
-		"Japanese-Note":              {Value: "test japanese note value"},
-		"Japanese-ToChineseNote":     {Value: "test japanese to chinese note value"},
-		"Answer-Note":                {Value: "test answer note value"},
+		"Expression":                 {"test expression value", 0},
+		"Meaning":                    {"test meaning value", 1},
+		"Reading":                    {"test reading value", 2},
+		"Japanese-ToSound":           {"[sound:test expression value.mp3]", 3},
+		"JapaneseSentence":           {"test japanese hiragana sentence value", 4},
+		"JapaneseSentence-ToSound":   {"[sound:test japanese sentence.mp3]", 5},
+		"JapaneseSentence-ToChinese": {"test japanese sentence to chinese value", 6},
+		"Japanese-Note":              {"test japanese note value", 7},
+		"Japanese-ToChineseNote":     {"test japanese to chinese note value", 8},
+		"Answer-Note":                {"test answer note value", 9},
 	}
 	note := AnkiNote{
-		Id:        123,
+		Id:        int64(123),
 		ModelName: "Japanese (recognition&recall)",
 		Fields:    fields,
 		Tags:      []string{"anki-helper-vocabulary-todo"},
@@ -72,12 +72,12 @@ func (t *OperatorSuite) Test_normal_operator() {
 		UpdateNoteById(note.Id, note, []Audio{
 			{
 				Path:     expressionVoicePath,
-				Filename: fmt.Sprintf("[Sound:%s.mp3]", fields["Meaning"].Value),
+				Filename: fmt.Sprintf("%s.mp3", fields["Expression"].Value),
 				Fields:   []string{"Japanese-ToSound"},
 			},
 			{
 				Path:     japaneseSentenceVoicePath,
-				Filename: fmt.Sprintf("[Sound:%s.mp3]", japaneseSentence),
+				Filename: fmt.Sprintf("%s.mp3", japaneseSentence),
 				Fields:   []string{"JapaneseSentence-ToSound"},
 			},
 		}).
@@ -94,16 +94,16 @@ func (t *OperatorSuite) Test_normal_operator() {
 			"Expression":                 fields["Expression"],
 			"Meaning":                    fields["Meaning"],
 			"Reading":                    fields["Reading"],
-			"Japanese-ToSound":           {Value: ""},
-			"JapaneseSentence":           {Value: ""},
-			"JapaneseSentence-ToSound":   {Value: ""},
-			"JapaneseSentence-ToChinese": {Value: ""},
-			"Japanese-Note":              {Value: "test japanese note value"},
-			"Japanese-ToChineseNote":     {Value: "test japanese to chinese note value"},
-			"Answer-Note":                {Value: "test answer note value"},
+			"Japanese-ToSound":           {"", 3},
+			"JapaneseSentence":           {"", 4},
+			"JapaneseSentence-ToSound":   {"", 5},
+			"JapaneseSentence-ToChinese": {"", 6},
+			"Japanese-Note":              {"test japanese note value", 7},
+			"Japanese-ToChineseNote":     {"test japanese to chinese note value", 8},
+			"Answer-Note":                {"test answer note value", 9},
 		},
 		Tags: []string{"anki-helper-vocabulary-todo"},
-	})
+	}, rememberVocabularyList)
 	t.NoError(err)
 	err = operator.Do()
 	t.NoError(err)

@@ -28,15 +28,15 @@ func (t *AnkiOperationSuite) Test_get_correct_modal_type_operator() {
 		ModelName: "Japanese (recognition&recall)",
 	}
 	generator := OperatorGenerate{}
-	normalOperator, _ := generator.GetByNote(note)
-	_, ok := normalOperator.(*NormalOperator)
-	t.True(ok, "type is not *NormalOperator")
+	normalOperator, _ := generator.GetByNote(note, nil)
+	_, ok := normalOperator.(*NormalJapaneseOperator)
+	t.True(ok, "type is not *NormalJapaneseOperator")
 
 	note = AnkiNote{
 		ModelName: "Japanese (recognition&recall) 動詞篇",
 	}
 	generator = OperatorGenerate{}
-	verbOperator, _ := generator.GetByNote(note)
+	verbOperator, _ := generator.GetByNote(note, nil)
 	_, ok = verbOperator.(*VerbOperator)
 	t.True(ok, "type is not *VerbOperator")
 
@@ -44,7 +44,7 @@ func (t *AnkiOperationSuite) Test_get_correct_modal_type_operator() {
 		ModelName: "Japanese (recognition&recall) 形容詞",
 	}
 	generator = OperatorGenerate{}
-	adjOperator, _ := generator.GetByNote(note)
+	adjOperator, _ := generator.GetByNote(note, nil)
 	_, ok = adjOperator.(*AdjOperator)
 	t.True(ok, "type is not *AdjOperator")
 }
