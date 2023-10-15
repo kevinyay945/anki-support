@@ -1,6 +1,7 @@
-package domain
+package application
 
 import (
+	"anki-support/domain"
 	"fmt"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/mock/gomock"
@@ -10,10 +11,10 @@ import (
 type OperatorSuite struct {
 	suite.Suite
 	mockCtrl           *gomock.Controller
-	generator          OperatorGenerator
-	mockGPTer          *MockGPTer
-	mockAnkier         *MockAnkier
-	mockTextToSpeecher *MockTextToSpeecher
+	generator          AnkiOperatorFactorier
+	mockGPTer          *domain.MockGPTer
+	mockAnkier         *domain.MockAnkier
+	mockTextToSpeecher *domain.MockTextToSpeecher
 }
 
 func TestSuiteInitOperator(t *testing.T) {
@@ -22,10 +23,10 @@ func TestSuiteInitOperator(t *testing.T) {
 
 func (t *OperatorSuite) SetupTest() {
 	t.mockCtrl = gomock.NewController(t.Suite.T())
-	t.mockGPTer = NewMockGPTer(t.mockCtrl)
-	t.mockAnkier = NewMockAnkier(t.mockCtrl)
-	t.mockTextToSpeecher = NewMockTextToSpeecher(t.mockCtrl)
-	t.generator = NewOperatorGenerate(t.mockGPTer, t.mockTextToSpeecher, t.mockAnkier)
+	t.mockGPTer = domain.NewMockGPTer(t.mockCtrl)
+	t.mockAnkier = domain.NewMockAnkier(t.mockCtrl)
+	t.mockTextToSpeecher = domain.NewMockTextToSpeecher(t.mockCtrl)
+	t.generator = NewAnkiOperatorFactory(t.mockGPTer, t.mockTextToSpeecher, t.mockAnkier)
 }
 
 func (t *OperatorSuite) TearDownTest() {
@@ -33,7 +34,7 @@ func (t *OperatorSuite) TearDownTest() {
 }
 
 func (t *OperatorSuite) Test_normal_operator() {
-	fields := map[string]FieldData{
+	fields := map[string]domain.AnkiFieldData{
 		"Expression":                 {"test expression value", 0},
 		"Meaning":                    {"test meaning value", 1},
 		"Reading":                    {"test reading value", 2},
@@ -45,7 +46,7 @@ func (t *OperatorSuite) Test_normal_operator() {
 		"Japanese-ToChineseNote":     {"test japanese to chinese note value", 8},
 		"Answer-Note":                {"test answer note value", 9},
 	}
-	note := AnkiNote{
+	note := domain.AnkiNote{
 		Id:        int64(123),
 		ModelName: "Japanese (recognition&recall)",
 		Fields:    fields,
@@ -69,7 +70,7 @@ func (t *OperatorSuite) Test_normal_operator() {
 		Return(japaneseSentenceVoicePath, nil)
 	// ankier update note by id with expect data
 	t.mockAnkier.EXPECT().
-		UpdateNoteById(note.Id, note, []Audio{
+		UpdateNoteById(note.Id, note, []domain.AnkiAudio{
 			{
 				Path:     expressionVoicePath,
 				Filename: fmt.Sprintf("%s.mp3", fields["Expression"].Value),
@@ -83,14 +84,14 @@ func (t *OperatorSuite) Test_normal_operator() {
 		}).
 		Return(nil)
 	// delete t-o-d-o tag in anki card
-	t.mockAnkier.EXPECT().DeleteNoteTagFromNoteId(note.Id, AnkiTodoTagName).Return(nil)
+	t.mockAnkier.EXPECT().DeleteNoteTagFromNoteId(note.Id, domain.AnkiTodoTagName).Return(nil)
 	// add done tag at anki card
-	t.mockAnkier.EXPECT().AddNoteTagFromNoteId(note.Id, AnkiDoneTagName).Return(nil)
+	t.mockAnkier.EXPECT().AddNoteTagFromNoteId(note.Id, domain.AnkiDoneTagName).Return(nil)
 
-	operator, err := t.generator.GetByNote(AnkiNote{
+	operator, err := t.generator.CreateByNote(domain.AnkiNote{
 		Id:        note.Id,
 		ModelName: note.ModelName,
-		Fields: map[string]FieldData{
+		Fields: map[string]domain.AnkiFieldData{
 			"Expression":                 fields["Expression"],
 			"Meaning":                    fields["Meaning"],
 			"Reading":                    fields["Reading"],

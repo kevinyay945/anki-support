@@ -10,23 +10,23 @@ type Ankier interface {
 	AddNoteTagFromNoteId(NoteId int64, tagName string) (err error)
 	DeleteNoteTagFromNoteId(NoteId int64, tagName string) (err error)
 	// UpdateNoteById can't update tag at the same time
-	UpdateNoteById(noteId int64, note AnkiNote, audioList []Audio) (err error)
+	UpdateNoteById(noteId int64, note AnkiNote, audioList []AnkiAudio) (err error)
 }
 
 type (
 	AnkiNote struct {
 		Id        int64
 		ModelName string
-		Fields    map[string]FieldData
+		Fields    map[string]AnkiFieldData
 		Tags      []string
 	}
-	FieldData struct {
+	AnkiFieldData struct {
 		Value string
 		Order int64
 	}
 
-	// Audio can be used to add a audio file to a Anki Note.
-	Audio struct {
+	// AnkiAudio can be used to add a audio file to a Anki Note.
+	AnkiAudio struct {
 		URL      string   `json:"url,omitempty"`
 		Data     string   `json:"data,omitempty"`
 		Path     string   `json:"path,omitempty"`
@@ -35,8 +35,8 @@ type (
 		Fields   []string `json:"fields,omitempty"`
 	}
 
-	// Video can be used to add a video file to a Anki Note.
-	Video struct {
+	// AnkiVideo can be used to add a video file to a Anki Note.
+	AnkiVideo struct {
 		URL      string   `json:"url,omitempty"`
 		Data     string   `json:"data,omitempty"`
 		Path     string   `json:"path,omitempty"`
@@ -45,8 +45,8 @@ type (
 		Fields   []string `json:"fields,omitempty"`
 	}
 
-	// Picture can be used to add a picture to an Anki Note.
-	Picture struct {
+	// AnkiPicture can be used to add a picture to an Anki Note.
+	AnkiPicture struct {
 		URL      string   `json:"url,omitempty"`
 		Data     string   `json:"data,omitempty"`
 		Path     string   `json:"path,omitempty"`

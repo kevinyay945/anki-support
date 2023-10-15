@@ -68,7 +68,7 @@ func (t *AnkiSuite) Test_update_note_and_audio() {
 		SkipHash: "",
 		Fields:   []string{"Meaning"},
 	}}, nil, nil)
-	err = t.anki.UpdateNoteById(456, domainNote, []domain.Audio{
+	err = t.anki.UpdateNoteById(456, domainNote, []domain.AnkiAudio{
 		{
 			URL:      "url audio link",
 			Data:     "base64 audio",
@@ -97,7 +97,7 @@ func (t *AnkiSuite) getInfrastructureAndDomainNote() (domain.AnkiNote, ankiconne
 	exampleNote := domain.AnkiNote{
 		Id:        noteId,
 		ModelName: modelName,
-		Fields:    map[string]domain.FieldData{},
+		Fields:    map[string]domain.AnkiFieldData{},
 		Tags:      tags,
 	}
 	exampleResultNotesInfo := ankiconnect.ResultNotesInfo{
@@ -107,7 +107,7 @@ func (t *AnkiSuite) getInfrastructureAndDomainNote() (domain.AnkiNote, ankiconne
 		Tags:      tags,
 	}
 	for key, data := range fieldData {
-		exampleNote.Fields[key] = domain.FieldData{
+		exampleNote.Fields[key] = domain.AnkiFieldData{
 			data.Value, data.Order,
 		}
 		exampleResultNotesInfo.Fields[key] = ankiconnect.FieldData{

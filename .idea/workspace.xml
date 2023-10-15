@@ -4,17 +4,37 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="fix: goland can't detect method and fix name">
+    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="feat: finish normal operator test case">
+      <change afterPath="$PROJECT_DIR$/application/anki_operator.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/anki_operator_adj.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/anki_operator_verb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/anki_repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/anki_repository_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/cmd/run.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/cmd/run_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki_operator.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/anki_operator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/anki_operator_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/anki_operator_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/operator.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/operator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/operator_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/operator_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/anki_operator.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_factory.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/anki_operator_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_factory_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/ankier.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/ankier.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/ankier.mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/ankier.mock.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/note_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/note_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/operator.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_normal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/operator_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_normal_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/anki.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/anki.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/anki_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/anki_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" url="file://$USER_HOME$/.gvm/gos/go1.21" />
   <component name="Git.Settings">
@@ -30,25 +50,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kevin&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/kevin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
-  <component name="RunManager" selected="Go Test.Test_normal_operator in anki-support/domain">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="GoMoveDeclarationDialog.RECENT_KEY">
+      <recent name="$PROJECT_DIR$/interfaces" />
+      <recent name="$PROJECT_DIR$/application" />
+    </key>
+    <key name="GoExtractInterfaceDialog.RECENT_KEY">
+      <recent name="$PROJECT_DIR$/application" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/interfaces/cmd" />
+      <recent name="$PROJECT_DIR$/application" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Test.Test_run_for_specific_deck in anki-support/interfaces/cmd">
     <configuration name="AnkiOperationSuite in anki-support/domain" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="anki-support" />
       <working_directory value="$PROJECT_DIR$/domain" />
@@ -60,6 +94,32 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestSuiteInitAnkiOperation\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_Get_anki_note_by_deck_name in anki-support/application" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="anki-support" />
+      <working_directory value="$PROJECT_DIR$/application" />
+      <parameters value=" -testify.m ^Test_Get_anki_note_by_deck_name$" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="anki-support/application" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestSuiteInitAnkiRepository\E$/^\QTest_Get_anki_note_by_deck_name\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_Get_anki_todo_note_by_deck_name in anki-support/application" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="anki-support" />
+      <working_directory value="$PROJECT_DIR$/application" />
+      <parameters value=" -testify.m ^Test_Get_anki_todo_note_by_deck_name$" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="anki-support/application" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestSuiteInitAnkiRepository\E$/^\QTest_Get_anki_todo_note_by_deck_name\E$" />
       <method v="2" />
     </configuration>
     <configuration name="Test_normal_operator in anki-support/domain" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -75,8 +135,24 @@
       <pattern value="^\QTestSuiteInitOperator\E$/^\QTest_normal_operator\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="Test_run_for_specific_deck in anki-support/interfaces/cmd" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="anki-support" />
+      <working_directory value="$PROJECT_DIR$/interfaces/cmd" />
+      <parameters value=" -testify.m ^Test_run_for_specific_deck$" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="anki-support/interfaces/cmd" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestSuiteInitRun\E$/^\QTest_run_for_specific_deck\E$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.Test_run_for_specific_deck in anki-support/interfaces/cmd" />
+        <item itemvalue="Go Test.Test_Get_anki_todo_note_by_deck_name in anki-support/application" />
+        <item itemvalue="Go Test.Test_Get_anki_note_by_deck_name in anki-support/application" />
         <item itemvalue="Go Test.Test_normal_operator in anki-support/domain" />
         <item itemvalue="Go Test.AnkiOperationSuite in anki-support/domain" />
       </list>
@@ -101,7 +177,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CODE_SMELLS_PROFILE" value="Project Default" />
     <MESSAGE value="fix: goland can't detect method and fix name" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: goland can't detect method and fix name" />
+    <MESSAGE value="feat: finish normal operator test case" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: finish normal operator test case" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

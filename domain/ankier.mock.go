@@ -227,7 +227,7 @@ func (c *AnkierGetTodoNoteFromDeckCall) DoAndReturn(f func(string) ([]AnkiNote, 
 }
 
 // UpdateNoteById mocks base method.
-func (m *MockAnkier) UpdateNoteById(arg0 int64, arg1 AnkiNote, arg2 []Audio) error {
+func (m *MockAnkier) UpdateNoteById(arg0 int64, arg1 AnkiNote, arg2 []AnkiAudio) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateNoteById", arg0, arg1, arg2)
 	ret0, _ := ret[0].(error)
@@ -253,13 +253,13 @@ func (c *AnkierUpdateNoteByIdCall) Return(arg0 error) *AnkierUpdateNoteByIdCall 
 }
 
 // Do rewrite *gomock.Call.Do
-func (c *AnkierUpdateNoteByIdCall) Do(f func(int64, AnkiNote, []Audio) error) *AnkierUpdateNoteByIdCall {
+func (c *AnkierUpdateNoteByIdCall) Do(f func(int64, AnkiNote, []AnkiAudio) error) *AnkierUpdateNoteByIdCall {
 	c.Call = c.Call.Do(f)
 	return c
 }
 
 // DoAndReturn rewrite *gomock.Call.DoAndReturn
-func (c *AnkierUpdateNoteByIdCall) DoAndReturn(f func(int64, AnkiNote, []Audio) error) *AnkierUpdateNoteByIdCall {
+func (c *AnkierUpdateNoteByIdCall) DoAndReturn(f func(int64, AnkiNote, []AnkiAudio) error) *AnkierUpdateNoteByIdCall {
 	c.Call = c.Call.DoAndReturn(f)
 	return c
 }

@@ -1,32 +1,20 @@
-package domain
+package application
 
-import "fmt"
+import (
+	"anki-support/domain"
+	"fmt"
+)
 
-type Operator interface {
-	Do() error
-}
-
-type NormalJapaneseOperator struct {
-	originNote AnkiNote
-	noteFields struct {
-		express                   string
-		meaning                   string
-		reading                   string
-		japaneseToSound           string
-		japaneseSentence          string
-		japaneseSentenceToSound   string
-		japaneseSentenceToChinese string
-		japaneseNote              string
-		japaneseToChineseNote     string
-		answerNote                string
-	}
-	gpter                  GPTer
-	textToSpeecher         TextToSpeecher
-	ankier                 Ankier
+type AnkiNormalJapaneseOperator struct {
+	originNote             domain.AnkiNote
+	noteFields             ankiNormalNoteField
+	gpter                  domain.GPTer
+	textToSpeecher         domain.TextToSpeecher
+	ankier                 domain.Ankier
 	rememberVocabularyList []string
 }
 
-type normalNoteField struct {
+type ankiNormalNoteField struct {
 	express                   string
 	meaning                   string
 	reading                   string
@@ -39,8 +27,8 @@ type normalNoteField struct {
 	answerNote                string
 }
 
-func (f normalNoteField) FieldDataMap() map[string]FieldData {
-	return map[string]FieldData{
+func (f ankiNormalNoteField) FieldDataMap() map[string]domain.AnkiFieldData {
+	return map[string]domain.AnkiFieldData{
 		"Expression":                 {f.express, 0},
 		"Meaning":                    {f.meaning, 1},
 		"Reading":                    {f.reading, 2},
@@ -54,9 +42,9 @@ func (f normalNoteField) FieldDataMap() map[string]FieldData {
 	}
 }
 
-func NewNormalOperator(note AnkiNote, gpter GPTer, textToSpeecher TextToSpeecher, ankier Ankier, rememberVocabularyList []string) *NormalJapaneseOperator {
+func NewAnkiNormalOperator(note domain.AnkiNote, gpter domain.GPTer, textToSpeecher domain.TextToSpeecher, ankier domain.Ankier, rememberVocabularyList []string) AnkiOperator {
 
-	noteFields := normalNoteField{
+	noteFields := ankiNormalNoteField{
 		express:                   note.Fields["Expression"].Value,
 		meaning:                   note.Fields["Meaning"].Value,
 		reading:                   note.Fields["Reading"].Value,
@@ -68,7 +56,7 @@ func NewNormalOperator(note AnkiNote, gpter GPTer, textToSpeecher TextToSpeecher
 		japaneseToChineseNote:     note.Fields["Japanese-ToChineseNote"].Value,
 		answerNote:                note.Fields["Answer-Note"].Value,
 	}
-	return &NormalJapaneseOperator{
+	return &AnkiNormalJapaneseOperator{
 		originNote:             note,
 		noteFields:             noteFields,
 		gpter:                  gpter,
@@ -78,11 +66,11 @@ func NewNormalOperator(note AnkiNote, gpter GPTer, textToSpeecher TextToSpeecher
 	}
 }
 
-func (n *NormalJapaneseOperator) Do() error {
+func (n *AnkiNormalJapaneseOperator) Do() error {
 	expressFilePath, _ := n.textToSpeecher.GetJapaneseSound(n.noteFields.express)
 	sentence, hiraganaSentence, chineseSentence, _ := n.gpter.MakeJapaneseSentence(n.noteFields.express, n.noteFields.meaning, n.rememberVocabularyList)
 	sentenceFilePath, _ := n.textToSpeecher.GetJapaneseSound(sentence)
-	field := normalNoteField{
+	field := ankiNormalNoteField{
 		express:                   n.noteFields.express,
 		meaning:                   n.noteFields.meaning,
 		reading:                   n.noteFields.reading,
@@ -95,7 +83,7 @@ func (n *NormalJapaneseOperator) Do() error {
 		answerNote:                n.noteFields.answerNote,
 	}
 	n.originNote.Fields = field.FieldDataMap()
-	_ = n.ankier.UpdateNoteById(n.originNote.Id, n.originNote, []Audio{
+	_ = n.ankier.UpdateNoteById(n.originNote.Id, n.originNote, []domain.AnkiAudio{
 		{
 			Path:     expressFilePath,
 			Filename: fmt.Sprintf("%s.mp3", n.noteFields.express),
@@ -107,33 +95,7 @@ func (n *NormalJapaneseOperator) Do() error {
 			Fields:   []string{"JapaneseSentence-ToSound"},
 		},
 	})
-	n.ankier.AddNoteTagFromNoteId(n.originNote.Id, AnkiDoneTagName)
-	n.ankier.DeleteNoteTagFromNoteId(n.originNote.Id, AnkiTodoTagName)
+	n.ankier.AddNoteTagFromNoteId(n.originNote.Id, domain.AnkiDoneTagName)
+	n.ankier.DeleteNoteTagFromNoteId(n.originNote.Id, domain.AnkiTodoTagName)
 	return nil
-}
-
-type VerbOperator struct {
-	Note                   AnkiNote
-	gpter                  GPTer
-	textToSpeecher         TextToSpeecher
-	ankier                 Ankier
-	rememberVocabularyList []string
-}
-
-func (v *VerbOperator) Do() error {
-	//TODO implement me
-	panic("implement me")
-}
-
-type AdjOperator struct {
-	Note                   AnkiNote
-	gpter                  GPTer
-	textToSpeecher         TextToSpeecher
-	ankier                 Ankier
-	rememberVocabularyList []string
-}
-
-func (a *AdjOperator) Do() error {
-	//TODO implement me
-	panic("implement me")
 }

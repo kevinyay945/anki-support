@@ -24,18 +24,18 @@ func NewAnki(anki anki.Ankier) domain.Ankier {
 	return &Anki{anki: anki}
 }
 
-func (a *Anki) UpdateNoteById(noteId int64, note domain.AnkiNote, audioList []domain.Audio) (err error) {
-	updateNote := DomainNoteToAnkiconnectNoteInfo(note)
+func (a *Anki) UpdateNoteById(noteId int64, note domain.AnkiNote, audioList []domain.AnkiAudio) (err error) {
+	updateNote := DomainNoteToAnkiConnectNoteInfo(note)
 	updateNote.NoteId = noteId
 	var updateAudioList []ankiconnect.Audio
 	for _, audio := range audioList {
-		updateAudioList = append(updateAudioList, DomainAudioToAnkiconnectAudio(audio))
+		updateAudioList = append(updateAudioList, DomainAudioToAnkiConnectAudio(audio))
 	}
 	err = a.anki.EditNoteById(updateNote, updateAudioList, nil, nil)
 	return
 }
 
-func DomainAudioToAnkiconnectAudio(audio domain.Audio) ankiconnect.Audio {
+func DomainAudioToAnkiConnectAudio(audio domain.AnkiAudio) ankiconnect.Audio {
 	elems := ankiconnect.Audio{
 		URL:      audio.URL,
 		Data:     audio.Data,
@@ -47,7 +47,7 @@ func DomainAudioToAnkiconnectAudio(audio domain.Audio) ankiconnect.Audio {
 	return elems
 }
 
-func DomainNoteToAnkiconnectNoteInfo(n domain.AnkiNote) ankiconnect.ResultNotesInfo {
+func DomainNoteToAnkiConnectNoteInfo(n domain.AnkiNote) ankiconnect.ResultNotesInfo {
 	updateNote := ankiconnect.ResultNotesInfo{
 		NoteId:    n.Id,
 		ModelName: n.ModelName,
@@ -86,9 +86,9 @@ func (a *Anki) GetNoteListByDeckName(s string) (output []domain.AnkiNote, err er
 func GetNoteFromResultNotesInfo(note ankiconnect.ResultNotesInfo) (output domain.AnkiNote) {
 	output.ModelName = note.ModelName
 	output.Tags = note.Tags
-	output.Fields = map[string]domain.FieldData{}
+	output.Fields = map[string]domain.AnkiFieldData{}
 	for key, data := range note.Fields {
-		output.Fields[key] = domain.FieldData{
+		output.Fields[key] = domain.AnkiFieldData{
 			Value: data.Value,
 			Order: data.Order,
 		}
