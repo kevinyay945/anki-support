@@ -21,10 +21,14 @@ go_generate:
 
 .PHONY: clean
 clean:
-	#$(RM) ./di/wire_gen.go
+	$(RM) ./di/wire_gen.go
 	#$(RM) **/*.gen.go
 	$(RM) **/*.mock.go
 
+.PHONY: di
+di:
+	wire gen "./di"
+
 .PHONY: generate
-generate: clean go_generate
+generate: clean go_generate di
 

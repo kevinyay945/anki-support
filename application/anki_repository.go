@@ -6,6 +6,10 @@ type AnkiRepository struct {
 	ankier domain.Ankier
 }
 
+func NewAnkiRepository(ankier domain.Ankier) AnkiRepositorier {
+	return &AnkiRepository{ankier: ankier}
+}
+
 func (r *AnkiRepository) GetAllNotesByDeckName(deckName string) ([]domain.AnkiNote, error) {
 	output, err := r.ankier.GetNoteListByDeckName(deckName)
 	return output, err

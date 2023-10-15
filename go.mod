@@ -5,6 +5,8 @@ go 1.21.0
 require (
 	cloud.google.com/go/texttospeech v1.7.1
 	github.com/atselvan/ankiconnect v1.1.0
+	github.com/google/subcommands v1.2.0
+	github.com/google/wire v0.5.0
 	github.com/imroc/req/v3 v3.41.12
 	github.com/privatesquare/bkst-go-utils v1.5.4
 	github.com/sashabaranov/go-openai v1.15.2

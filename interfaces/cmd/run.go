@@ -10,6 +10,10 @@ type RunCmd struct {
 	ankiOperatorFactory application.AnkiOperatorFactorier
 }
 
+func NewRunCmd(ankiRepository application.AnkiRepositorier, ankiOperatorFactory application.AnkiOperatorFactorier) *RunCmd {
+	return &RunCmd{ankiRepository: ankiRepository, ankiOperatorFactory: ankiOperatorFactory}
+}
+
 func (c *RunCmd) RunForSpecificDeck(deckName string) (outputErr error) {
 	allNoteList, err := c.ankiRepository.GetAllNotesByDeckName(deckName)
 	if err != nil {
