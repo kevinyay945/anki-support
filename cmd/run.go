@@ -21,8 +21,12 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		diCmd := di.InitializeDICmd()
-		err := diCmd.RunCmd.RunForSpecificDeck("製作中日語卡片")
-		fmt.Printf("hello world, err: %s", err.Error())
+		err := diCmd.RunCmd.RunForSpecificDeck("日語單字")
+		if err != nil {
+			fmt.Printf("hello world, err: %s", err.Error())
+		} else {
+			fmt.Printf("Done")
+		}
 	},
 }
 

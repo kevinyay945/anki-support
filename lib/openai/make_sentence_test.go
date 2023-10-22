@@ -2,6 +2,7 @@ package openai
 
 import (
 	"anki-support/helper"
+	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/mock/gomock"
 	"gopkg.in/yaml.v3"
@@ -34,7 +35,8 @@ func (t *MakeSentenceSuite) SetupTest() {
 	t.NotEmpty(credential.Token, "OPEN AI Token is empty")
 	mockConfiger.EXPECT().OpenAIToken().Return(string(credential.Token))
 	helper.Config = mockConfiger
-	t.client = NewClient()
+	logger := logrus.New()
+	t.client = NewClient(logger)
 }
 
 func (t *MakeSentenceSuite) TearDownTest() {

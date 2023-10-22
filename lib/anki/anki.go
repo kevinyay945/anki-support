@@ -23,7 +23,7 @@ func (c *Anki) GetNoteFromDeckByTagName(deckName string, tagName string) ([]anki
 }
 
 func NewClient(log *logrus.Logger) Ankier {
-	field := log.WithField("lib", "anki")
+	field := log.WithField("package", "lib/anki")
 	c := &Anki{log: field}
 	c.ankiConnect = ankiconnect.NewClient()
 	c.httpClient = req.C()

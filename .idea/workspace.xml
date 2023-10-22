@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="feat: add run cmd">
-      <change afterPath="$PROJECT_DIR$/di/di.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/di/di_wire.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/log/log.go" afterDir="false" />
+    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="feat: normal card finish">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/anki_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/anki_operator_adj.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_adj.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/anki_operator_factory.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_factory.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/anki_operator_normal.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_normal.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/run.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/text_to_speech.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/text_to_speech.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interfaces/cmd/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/cmd/run.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/anki/anki.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/anki/anki_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/openai/make_sentence.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/openai/make_sentence.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/openai/make_sentence_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/openai/make_sentence_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/openai/openai.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/openai/openai.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,19 +86,6 @@
       <output_directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="AnkiOperationSuite in anki-support/domain" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/domain" />
-      <parameters value=" -testify.m ^Test_get_correct_modal_type_operator$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/domain" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitAnkiOperation\E$" />
-      <method v="2" />
-    </configuration>
     <configuration name="TestSuiteInitRun/Test_run_for_specific_deck in anki-support/interfaces/cmd" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="anki-support" />
       <working_directory value="$PROJECT_DIR$/interfaces/cmd" />
@@ -110,19 +97,6 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestSuiteInitRun\E$/^\QTest_run_for_specific_deck\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_Get_anki_note_by_deck_name in anki-support/application" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/application" />
-      <parameters value=" -testify.m ^Test_Get_anki_note_by_deck_name$" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="anki-support/application" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSuiteInitAnkiRepository\E$/^\QTest_Get_anki_note_by_deck_name\E$" />
       <method v="2" />
     </configuration>
     <configuration name="Test_Get_anki_todo_note_by_deck_name in anki-support/application" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -138,13 +112,39 @@
       <pattern value="^\QTestSuiteInitAnkiRepository\E$/^\QTest_Get_anki_todo_note_by_deck_name\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_normal_operator in anki-support/domain" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_get_todo_note_from_deck_name in anki-support/lib/anki" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="anki-support" />
-      <working_directory value="$PROJECT_DIR$/domain" />
+      <working_directory value="$PROJECT_DIR$/lib/anki" />
+      <parameters value=" -testify.m ^Test_get_todo_note_from_deck_name$" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="anki-support/lib/anki" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestSuiteInitAnki\E$/^\QTest_get_todo_note_from_deck_name\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_make_japanese_sentence in anki-support/lib/openai" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="anki-support" />
+      <working_directory value="$PROJECT_DIR$/lib/openai" />
+      <parameters value=" -testify.m ^Test_make_japanese_sentence$" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="anki-support/lib/openai" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestSuiteInitMakeSentence\E$/^\QTest_make_japanese_sentence\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_normal_operator in anki-support/application" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="anki-support" />
+      <working_directory value="$PROJECT_DIR$/application" />
       <parameters value=" -testify.m ^Test_normal_operator$" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="anki-support/domain" />
+      <package value="anki-support/application" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
@@ -153,19 +153,19 @@
     </configuration>
     <list>
       <item itemvalue="Go Build.go build anki-support" />
-      <item itemvalue="Go Test.AnkiOperationSuite in anki-support/domain" />
-      <item itemvalue="Go Test.Test_Get_anki_note_by_deck_name in anki-support/application" />
+      <item itemvalue="Go Test.Test_get_todo_note_from_deck_name in anki-support/lib/anki" />
+      <item itemvalue="Go Test.Test_make_japanese_sentence in anki-support/lib/openai" />
+      <item itemvalue="Go Test.Test_normal_operator in anki-support/application" />
       <item itemvalue="Go Test.Test_Get_anki_todo_note_by_deck_name in anki-support/application" />
-      <item itemvalue="Go Test.Test_normal_operator in anki-support/domain" />
       <item itemvalue="Go Test.TestSuiteInitRun/Test_run_for_specific_deck in anki-support/interfaces/cmd" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.Test_get_todo_note_from_deck_name in anki-support/lib/anki" />
+        <item itemvalue="Go Test.Test_make_japanese_sentence in anki-support/lib/openai" />
+        <item itemvalue="Go Test.Test_normal_operator in anki-support/application" />
         <item itemvalue="Go Test.TestSuiteInitRun/Test_run_for_specific_deck in anki-support/interfaces/cmd" />
         <item itemvalue="Go Test.Test_Get_anki_todo_note_by_deck_name in anki-support/application" />
-        <item itemvalue="Go Test.Test_Get_anki_note_by_deck_name in anki-support/application" />
-        <item itemvalue="Go Test.Test_normal_operator in anki-support/domain" />
-        <item itemvalue="Go Test.AnkiOperationSuite in anki-support/domain" />
       </list>
     </recent_temporary>
   </component>
@@ -190,7 +190,8 @@
     <MESSAGE value="fix: goland can't detect method and fix name" />
     <MESSAGE value="feat: finish normal operator test case" />
     <MESSAGE value="feat: add run cmd" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add run cmd" />
+    <MESSAGE value="feat: normal card finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: normal card finish" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -199,59 +200,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/application/anki_operator_normal.go</url>
-          <line>69</line>
+          <url>file://$PROJECT_DIR$/interfaces/cmd/run.go</url>
+          <line>28</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/application/anki_operator_normal.go</url>
-          <line>70</line>
+          <url>file://$PROJECT_DIR$/interfaces/cmd/run.go</url>
+          <line>38</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/application/anki_operator_normal.go</url>
-          <line>71</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/application/anki_operator_normal.go</url>
-          <line>85</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/application/anki_operator_normal.go</url>
-          <line>97</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/application/anki_operator_normal.go</url>
-          <line>98</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/infrastructure/text_to_speech.go</url>
-          <line>20</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/infrastructure/text_to_speech.go</url>
-          <line>19</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/lib/gcp/text_to_speech.go</url>
-          <line>40</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/lib/gcp/text_to_speech.go</url>
-          <line>45</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/lib/gcp/text_to_speech.go</url>
-          <line>43</line>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

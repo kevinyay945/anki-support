@@ -12,7 +12,7 @@ func (c *OpenAI) MakeJapaneseSentence(rememberVocabularyList []string, vocabular
 	resp, err := c.openai.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
-			Model: openai.GPT3Dot5Turbo,
+			Model: openai.GPT4,
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role: openai.ChatMessageRoleSystem,
@@ -141,6 +141,10 @@ func (c *OpenAI) MakeJapaneseSentence(rememberVocabularyList []string, vocabular
 			Temperature: math.SmallestNonzeroFloat32,
 		},
 	)
+	if err != nil {
+		c.log.Errorf("err: %s", err.Error())
+	}
+	c.log.Infof("open ai response: %v", resp.Choices)
 	result := resp.Choices[0].Message.Content
 	splitResult := strings.Split(result, "\n")
 	japaneseHiraganaSentence = splitResult[0]

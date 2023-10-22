@@ -26,13 +26,7 @@ func (g *AnkiOperatorFactory) CreateByNote(note domain.AnkiNote, rememberVocabul
 			rememberVocabularyList: rememberVocabularyList,
 		}
 	case "Japanese (recognition&recall) 形容詞":
-		o = &AnkiAdjOperator{
-			Note:                   note,
-			gpter:                  g.gpter,
-			textToSpeecher:         g.textToSpeecher,
-			ankier:                 g.ankier,
-			rememberVocabularyList: rememberVocabularyList,
-		}
+		o = NewAnkiAdjOperator(g.gpter, g.textToSpeecher, g.ankier, rememberVocabularyList, note)
 	case "Japanese (recognition&recall)":
 		o = NewAnkiNormalOperator(note, g.gpter, g.textToSpeecher, g.ankier, rememberVocabularyList)
 	default:

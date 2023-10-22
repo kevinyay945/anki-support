@@ -54,7 +54,7 @@ func (t *AnkiSuite) Test_get_all_note_from_deck_name() {
 }
 
 func (t *AnkiSuite) Test_get_todo_note_from_deck_name() {
-	deckName := "製作中日語卡片"
+	deckName := "日語單字"
 	note, err := t.client.GetNoteFromDeckByTagName(deckName, "anki-helper-vocabulary-todo")
 	t.NoError(err)
 	t.Len(note, 2)

@@ -7,6 +7,7 @@ import (
 
 type AnkiNormalJapaneseOperator struct {
 	originNote             domain.AnkiNote
+	updateAudio            []domain.AnkiAudio
 	noteFields             ankiNormalNoteField
 	gpter                  domain.GPTer
 	textToSpeecher         domain.TextToSpeecher
@@ -15,7 +16,7 @@ type AnkiNormalJapaneseOperator struct {
 }
 
 type ankiNormalNoteField struct {
-	express                   string
+	expression                string
 	meaning                   string
 	reading                   string
 	japaneseToSound           string
@@ -29,7 +30,7 @@ type ankiNormalNoteField struct {
 
 func (f ankiNormalNoteField) FieldDataMap() map[string]domain.AnkiFieldData {
 	return map[string]domain.AnkiFieldData{
-		"Expression":                 {f.express, 0},
+		"Expression":                 {f.expression, 0},
 		"Meaning":                    {f.meaning, 1},
 		"Reading":                    {f.reading, 2},
 		"Japanese-ToSound":           {f.japaneseToSound, 3},
@@ -45,7 +46,7 @@ func (f ankiNormalNoteField) FieldDataMap() map[string]domain.AnkiFieldData {
 func NewAnkiNormalOperator(note domain.AnkiNote, gpter domain.GPTer, textToSpeecher domain.TextToSpeecher, ankier domain.Ankier, rememberVocabularyList []string) AnkiOperator {
 
 	noteFields := ankiNormalNoteField{
-		express:                   note.Fields["Expression"].Value,
+		expression:                note.Fields["Expression"].Value,
 		meaning:                   note.Fields["Meaning"].Value,
 		reading:                   note.Fields["Reading"].Value,
 		japaneseToSound:           note.Fields["Japanese-ToSound"].Value,
@@ -67,35 +68,50 @@ func NewAnkiNormalOperator(note domain.AnkiNote, gpter domain.GPTer, textToSpeec
 }
 
 func (n *AnkiNormalJapaneseOperator) Do() error {
-	expressFilePath, _ := n.textToSpeecher.GetJapaneseSound(n.noteFields.express)
-	sentence, hiraganaSentence, chineseSentence, _ := n.gpter.MakeJapaneseSentence(n.noteFields.express, n.noteFields.meaning, n.rememberVocabularyList)
-	sentenceFilePath, _ := n.textToSpeecher.GetJapaneseSound(sentence)
-	field := ankiNormalNoteField{
-		express:                   n.noteFields.express,
-		meaning:                   n.noteFields.meaning,
-		reading:                   n.noteFields.reading,
-		japaneseToSound:           fmt.Sprintf("[sound:%s.mp3]", n.noteFields.express),
-		japaneseSentence:          hiraganaSentence,
-		japaneseSentenceToSound:   fmt.Sprintf("[sound:%s.mp3]", sentence),
-		japaneseSentenceToChinese: chineseSentence,
-		japaneseNote:              n.noteFields.japaneseNote,
-		japaneseToChineseNote:     n.noteFields.japaneseToChineseNote,
-		answerNote:                n.noteFields.answerNote,
-	}
-	n.originNote.Fields = field.FieldDataMap()
-	_ = n.ankier.UpdateNoteById(n.originNote.Id, n.originNote, []domain.AnkiAudio{
-		{
-			Path:     expressFilePath,
-			Filename: fmt.Sprintf("%s.mp3", n.noteFields.express),
-			Fields:   []string{"Japanese-ToSound"},
-		},
-		{
-			Path:     sentenceFilePath,
-			Filename: fmt.Sprintf("%s.mp3", sentence),
-			Fields:   []string{"JapaneseSentence-ToSound"},
-		},
-	})
+	_ = n.expressToSound()
+	_ = n.expressToSentenceAndSound()
+	n.originNote.Fields = n.noteFields.FieldDataMap()
+	_ = n.ankier.UpdateNoteById(n.originNote.Id, n.originNote, n.updateAudio)
 	n.ankier.AddNoteTagFromNoteId(n.originNote.Id, domain.AnkiDoneTagName)
 	n.ankier.DeleteNoteTagFromNoteId(n.originNote.Id, domain.AnkiTodoTagName)
+	return nil
+}
+
+func (n *AnkiNormalJapaneseOperator) expressToSound() error {
+	if n.noteFields.japaneseToSound != "" {
+		return nil
+	}
+	expressFilePath, _ := n.textToSpeecher.GetJapaneseSound(n.noteFields.expression)
+	n.noteFields.japaneseToSound = fmt.Sprintf("[sound:%s.mp3]", n.noteFields.expression)
+	n.updateAudio = append(n.updateAudio, domain.AnkiAudio{
+		Path:     expressFilePath,
+		Filename: fmt.Sprintf("%s.mp3", n.noteFields.expression),
+		Fields:   []string{"Japanese-ToSound"},
+	})
+	return nil
+}
+
+func (n *AnkiNormalJapaneseOperator) expressToSentenceAndSound() error {
+	if n.noteFields.japaneseSentenceToSound != "" {
+		return nil
+	}
+
+	var sentence, hiraganaSentence, chineseSentence string
+	if n.noteFields.japaneseSentence == "" {
+		sentence, hiraganaSentence, chineseSentence, _ = n.gpter.MakeJapaneseSentence(n.noteFields.expression, n.noteFields.meaning, n.rememberVocabularyList)
+	} else {
+		sentence = n.noteFields.japaneseSentence
+		hiraganaSentence = n.noteFields.japaneseSentence
+		chineseSentence = n.noteFields.japaneseSentenceToChinese
+	}
+	sentenceFilePath, _ := n.textToSpeecher.GetJapaneseSound(sentence)
+	n.noteFields.japaneseSentence = hiraganaSentence
+	n.noteFields.japaneseSentenceToSound = fmt.Sprintf("[sound:%s.mp3]", sentence)
+	n.noteFields.japaneseSentenceToChinese = chineseSentence
+	n.updateAudio = append(n.updateAudio, domain.AnkiAudio{
+		Path:     sentenceFilePath,
+		Filename: fmt.Sprintf("%s.mp3", sentence),
+		Fields:   []string{"JapaneseSentence-ToSound"},
+	})
 	return nil
 }
