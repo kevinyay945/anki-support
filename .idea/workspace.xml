@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="feat: normal card finish">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="feat: adj card finish">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/anki_operator_adj.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_adj.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/anki_operator_factory.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_factory.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/anki_operator_normal.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_normal.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/run.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/anki/anki.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/anki/anki_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/anki/anki_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/openai/make_sentence.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/openai/make_sentence.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/openai/make_sentence_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/openai/make_sentence_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/openai/openai.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/openai/openai.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/anki_operator_verb.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_verb.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,25 +183,10 @@
     <MESSAGE value="feat: finish normal operator test case" />
     <MESSAGE value="feat: add run cmd" />
     <MESSAGE value="feat: normal card finish" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: normal card finish" />
+    <MESSAGE value="feat: adj card finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: adj card finish" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/interfaces/cmd/run.go</url>
-          <line>28</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/interfaces/cmd/run.go</url>
-          <line>38</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

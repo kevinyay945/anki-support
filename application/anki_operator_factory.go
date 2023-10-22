@@ -18,13 +18,7 @@ func NewAnkiOperatorFactory(gpter domain.GPTer, textToSpeecher domain.TextToSpee
 func (g *AnkiOperatorFactory) CreateByNote(note domain.AnkiNote, rememberVocabularyList []string) (o AnkiOperator, err error) {
 	switch note.ModelName {
 	case "Japanese (recognition&recall) 動詞篇":
-		o = &AnkiVerbOperator{
-			Note:                   note,
-			gpter:                  g.gpter,
-			textToSpeecher:         g.textToSpeecher,
-			ankier:                 g.ankier,
-			rememberVocabularyList: rememberVocabularyList,
-		}
+		o = NewAnkiVerbOperator(g.gpter, g.textToSpeecher, g.ankier, rememberVocabularyList, note)
 	case "Japanese (recognition&recall) 形容詞":
 		o = NewAnkiAdjOperator(g.gpter, g.textToSpeecher, g.ankier, rememberVocabularyList, note)
 	case "Japanese (recognition&recall)":
