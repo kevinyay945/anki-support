@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="feat: adj card finish">
+    <list default="true" id="c58485f3-c2d5-44e5-a558-1d0bc98d894d" name="Changes" comment="feat: verb card finish">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/anki_operator_factory.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_factory.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/anki_operator_verb.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/anki_operator_verb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/openai/make_sentence.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/openai/make_sentence.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +183,8 @@
     <MESSAGE value="feat: add run cmd" />
     <MESSAGE value="feat: normal card finish" />
     <MESSAGE value="feat: adj card finish" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: adj card finish" />
+    <MESSAGE value="feat: verb card finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: verb card finish" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

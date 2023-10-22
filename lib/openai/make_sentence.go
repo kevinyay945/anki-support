@@ -5,14 +5,26 @@ import (
 	"fmt"
 	"github.com/sashabaranov/go-openai"
 	"math"
+	"math/rand"
 	"strings"
 )
 
 func (c *OpenAI) MakeJapaneseSentence(rememberVocabularyList []string, vocabulary, meaning string) (japaneseOriginSentence, japaneseHiraganaSentence, traditionalChineseSentence string, err error) {
+	var randomRememberVocabularyList []string
+	randomCount := 100
+	uniqueMap := map[int]bool{}
+	for len(randomRememberVocabularyList) < randomCount {
+		intn := rand.Intn(len(rememberVocabularyList))
+		if _, ok := uniqueMap[intn]; ok {
+			continue
+		}
+		uniqueMap[intn] = true
+		randomRememberVocabularyList = append(randomRememberVocabularyList, rememberVocabularyList[intn])
+	}
 	resp, err := c.openai.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
-			Model: openai.GPT4,
+			Model: openai.GPT3Dot5Turbo,
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role: openai.ChatMessageRoleSystem,
@@ -51,7 +63,7 @@ func (c *OpenAI) MakeJapaneseSentence(rememberVocabularyList []string, vocabular
 接下來的所有回應請用日文來進行
 
 以下為曾經背過的日文單詞
-` + strings.Join(rememberVocabularyList, ","),
+` + strings.Join(randomRememberVocabularyList, ","),
 				},
 				{
 					Role:    openai.ChatMessageRoleUser,
